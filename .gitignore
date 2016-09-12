@@ -1,0 +1,5 @@
+# Stupid tex biproducts
+*.aux
+*.log
+*.gz
+
