@@ -1,0 +1,83 @@
+\documentclass[10pt, a4paper]{amsart}
+
+\usepackage{amsmath}
+\usepackage{physics}
+
+\title{Micro- and Macrostates in Thermal Physics \\
+	\hrulefill\fbox{FYS2160}\hrulefill}
+	
+\author[Winther-Larsen]{Sebastian G. Winther-Larsen}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{Introduction}
+This is a brief study of micro- and macrostates in thermal phyics and statistical mechanics\footnote{I have come to realise that these two terms are somewhat interchangeable}. In statistical mechanics, a microstate is a specific microscopic configuration of a thermodynamic system that the system may occupy with a certain probability in the course of its thermal fluctuations. In contrast, the macrostate of a system refers to its macroscopic properties, such as its temperature, pressure, volume and density. Two models are introduced in this study; \emph{the Einstein crystal}, which could respresent a silicone crystal, and the \emph{spin system}, which could represent a system of magnetic dipoles
+
+\section{The Einstein Crystal}
+
+\subsection{Theoretical background}
+In a real crystal, individual atoms oscillate around an equilibrium posistion while interacting mostly with its nearest neighbors. A simplified model for such a system can be represented by a harmonic oscillator potential in three dimensions
+\begin{equation}
+U_i(\vb{r}_i)=\frac{1}{2}k_x(x_i-x_{i,eq})^2+\frac{1}{2}k_y(y_i-y_{i,eq})^2+\frac{1}{2}k_z(z_i-z_{i,eq})^2
+\end{equation} 
+From quantum mechanics, we know that the energy of a harmonic oscillator is
+\begin{equation}
+\epsilon_i=n_i\Delta \epsilon
+\end{equation}
+where $n_i$ is an integer describing the state of oscillator $i$. The entire system of $N$ such (non-interacting) oscillators will have total energy
+\begin{equation}
+\label{eq:totalU}
+U=\sum_{i=1}^N \epsilon n_i
+\end{equation}
+For simplicity the energy is measured in units of $\epsilon$.
+\begin{equation}
+q = \frac{U}{\epsilon}=\sum_{i=1} n_i
+\end{equation}
+This is equivalent to equation \ref{eq:totalU}, but implies that a specific system will have constant total energy, yet the energy distribution may change.
+
+A microstate of the Einstein crystal is described by the numbers $n_i$ for each oscillator
+\begin{equation}
+\{n_1,n_2,\dots,n_N\}
+\end{equation}
+For example, for a system with $N=4$ and $q=4$, a possible microstate is $\{1,0,2,1\}$.
+
+\subsection{Simple microstates}
+In a system with $N=3$ and $q=3$ there are ten possible microstates
+\begin{align*}
+&\{0,0,3\},\{3,0,0\},\{3,0,0\},\{0,1,2\},\{1,0,2\},\\
+&\{1,2,0\},\{2,1,0\},\{2,0,1\},\{2,1,0\},\{1,1,1\}
+\end{align*}
+For an easy case like this it is relatively easy to write out all the different microstates. When the system is bigger, with higher $N$, a human may not be up for the task.
+
+The general formula for computing the number of microstates for $N$ oscillators with $q$ units of energy is
+\begin{equation}
+\Omega(N,q)=\binom{q+N-1}{q}=\frac{(q+N-1)!}{q!(N-1)!}
+\end{equation} 
+Plugging in for $N=3$ and $q=3$ indeed yields the expected result
+\begin{equation*}
+\Omega(3,3)=\binom{3+3-1}{3}=\binom{5}{3}=\frac{5!}{3!2!}=\frac{5\cdot4}{2}=10
+\end{equation*}
+
+\subsection{Two subsystems in thermal contact}
+Consider two initially isolated subsystems, system $A$ with $N_A=2$ oscillators and energy $q_A=5$; and system $B$ with $N_B=2$ oscillators and energy $q_B=1$. Subsystem $A$ has the following six possible microstates 
+\begin{equation}
+\{0,5\},\{1,4\},\{2,3\},\{3,2\},\{4,1\},\{5,0\}
+\end{equation} 
+and subsystem $B$ will have the following two microstates
+\begin{equation}
+\{0,1\},\{1,0\}
+\end{equation}
+All the microstates from one of the subsystems can be combined with any from the othes system giving a total number of $6\cdot2=12$ possible microstates.
+
+Now, let the two subsystems be put in thermal contact. This means that they can exchange energy, but that the number of particles and volume of each subsystem does not change. The total energy ($q=q_A+q_B=6$) can be distributed between the two subsystems. The possible values of $q_k=q-q_{k^c}$ where $k \in \{A,B\}$. $k^c$ is the complement of $k$, whatever $k$ is not. It follows that the possible energy values must be $q_k \in [0,q]=[0,6]$.
+
+We call a state with a given $q_A$ for a \emph{macrostate} of the combined system. This means that there are a total of seven macrostates in the system. 
+\section{The Spin System}
+
+\end{document}
