@@ -1,9 +1,28 @@
-\documentclass[10pt, a4paper]{amsart}
+\documentclass[10pt,a4paper]{amsart}
 
 \usepackage{amsmath}
 \usepackage{physics}
+\usepackage{listings}
+\usepackage{graphicx}
 
-\title{Micro- and Macrostates in Thermal Physics \\
+\usepackage{color}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\definecolor{mygray}{rgb}{0.9,0.9,0.9}
+\definecolor{orange}{rgb}{0.9,0.3,0}
+
+\lstset{
+	frame = single,
+	language = Python,
+	showstringspaces = false,
+	tabsize = 2,
+	otherkeywords = {self},
+	keywordstyle = \color{blue},
+	identifierstyle=\color{deepgreen},
+ 	stringstyle=\color{orange},
+ 	backgroundcolor=\color{mygray}
+}
+
+\title[Micro and Macrostates in Thermal Physics]{Micro- and Macrostates in Thermal Physics \\
 	\hrulefill\fbox{FYS2160}\hrulefill}
 	
 \author[Winther-Larsen]{Sebastian G. Winther-Larsen}
@@ -57,6 +76,7 @@ For an easy case like this it is relatively easy to write out all the different 
 
 The general formula for computing the number of microstates for $N$ oscillators with $q$ units of energy is
 \begin{equation}
+\label{eq:binom}
 \Omega(N,q)=\binom{q+N-1}{q}=\frac{(q+N-1)!}{q!(N-1)!}
 \end{equation} 
 Plugging in for $N=3$ and $q=3$ indeed yields the expected result
@@ -77,7 +97,72 @@ All the microstates from one of the subsystems can be combined with any from the
 
 Now, let the two subsystems be put in thermal contact. This means that they can exchange energy, but that the number of particles and volume of each subsystem does not change. The total energy ($q=q_A+q_B=6$) can be distributed between the two subsystems. The possible values of $q_k=q-q_{k^c}$ where $k \in \{A,B\}$. $k^c$ is the complement of $k$, whatever $k$ is not. It follows that the possible energy values must be $q_k \in [0,q]=[0,6]$.
 
-We call a state with a given $q_A$ for a \emph{macrostate} of the combined system. This means that there are a total of seven macrostates in the system. 
+We call a state with a given $q_A$ for a \emph{macrostate} of the combined system. This means that there are a total of seven macrostates in the system, listed in table \ref{tab:einsteinmacro}
+
+\begin{table}[h]
+\caption{Macrostates and mulitpicities of a system with two Einstein crystals}
+\begin{tabular}{rrrrr} \hline
+ $q_A$ & $\Omega_A$ & $q_B$ & $\Omega_B$ & $\Omega_{tot}$ \\ \hline
+    0  &  1 &  6  &  7   &   7 \\
+    1  &  2 &  5  &  6   &  12 \\
+    2  &  3 &  4  &  5   &  15 \\
+    3  &  4 &  3  &  4   &  16 \\
+    4  &  5 &  2  &  3   &  15 \\
+    5  &  6 &  1  &  2   &  12 \\
+    6  &  7 &  0  &  1   &   7 \\ \hline
+       &    &     & Sum: &  84 \\ \hline  
+\end{tabular}
+\label{tab:einsteinmacro}
+\end{table}
+These values have been calculated using the binomial coefficient in equation \ref{eq:binom}. The full number of microstates for a given macrostate $q_A$ are given in the last column as the total multiplicity $\Omega_{tot}=\Omega_A\Omega_B$.
+
+The following source code listing provides a way to compute the same numbers with a class in Python.
+
+\lstinputlisting[firstline=4, lastline=28]{oblig01.py}
+
+An object of this class defines a system consisting of two subsystems, $A$ and $B$. To get information about the states and multiplicity of the system I have written the following method\footnote{I am uncertain what names to use: object or class instance; and method or function. My sincere apologies to the reader if some other words than than the ones I have chosen are the norm for Python.}. This method displays information about smaller systems quite well.
+
+\lstinputlisting[firstline=31, lastline=43]{oblig01.py}
+
+To compute probability of every state and to plot det probability density function I have writting this next method method which computes the probabilities for the macrostates $q_A$. The probability are computed by dividing all possible microstates for a given macrostate by every possible micorstate.
+\begin{equation}
+p(q_A)=\frac{\Omega_{i,tot}}{\sum\Omega_{i,tot}}
+\end{equation}
+
+\lstinputlisting[firstline=46, lastline=61]{oblig01.py}
+The method prints to terminal the probabilities that are given in table \ref{tab:einsteinprobs}.
+\begin{table}[h]
+\caption{Probabilities of the macrostates for two Einsten crystals where $q=6$ and $N_A=N_B=2$}
+\begin{tabular}{cc} \hline
+ $q_A$ & $P(q_A)$ \\ \hline
+ 0 & 0.0833 \\
+ 1 & 0.1429 \\
+ 2 & 0.1786 \\
+ 3 & 0.1905 \\
+ 4 & 0.1786 \\
+ 5 & 0.1429 \\
+ 6 & 0.0833 \\ \hline
+ Sum: & 1.0 \\ \hline
+\end{tabular}
+\label{tab:einsteinprobs}
+\end{table}
+
+The maximium number of microstates before the two crystals came in thermal contact was only $\sum\Omega_{i,tot}=12$. For the interconnected system, the number of allows microstates have risen dramatically to $\sum\Omega_{i,tot}=84$. Another aspect to draw attention to is that the highest number of possible microstates for a givin macrostate is highest when the energy in the crystals, $q_A$ and $q_b$ are similar. This is clear from looking at table \ref{tab:einsteinmacro}. It would be intersting to see if the same holds true for an even larger system. Figure \ref{fig:EinsteinPDF} shows the an approximation of a probability density function for the two crystals when the parameters are increased to $q=100$ and $N_A=N_B=50$. The tendency is very clear, as we see the graph forms a characteristic bell curve with a peak at $q_A=50$, where the energy of the two crystals are most similar. The probability for this exact macrostate is $p(q_A=50) \approx 5.6\%$.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.9\linewidth]{EinsteinPDF.png}
+  \caption{Probability density function for two interconnected Einstein crystals with $q=100$ and $N_A=N_B=50$}
+  \label{fig:EinsteinPDF}
+\end{figure}
+
+\subsection{Thermodynamic properties}
+Equation \ref{eq:binom} gives us the multiplicity of a system as a binomial coefficient
+\begin{equation*}
+\Omega(N,q)=\binom{q+N-1}{q}=\frac{(q+N-1)!}{q!(N-1)!}
+\end{equation*}
+Using Stirlings's approximation, $\ln x!=x\ln x-x$, this expression can be simplified.
+
 \section{The Spin System}
 
 \end{document}
