@@ -4,6 +4,7 @@
 \usepackage{physics}
 \usepackage{listings}
 \usepackage{graphicx}
+\usepackage{hyperref}
 
 \usepackage{color}
 \definecolor{deepgreen}{rgb}{0,0.5,0}
@@ -25,7 +26,8 @@
 \title[Micro and Macrostates in Thermal Physics]{Micro- and Macrostates in Thermal Physics \\
 	\hrulefill\fbox{FYS2160}\hrulefill}
 	
-\author[Winther-Larsen]{Sebastian G. Winther-Larsen}
+\author[Winther-Larsen]{Sebastian G. Winther-Larsen\\
+\href{https://github.com/gregwinther/FYS2160/}{\texttt{github.com/gregwinther}}}
 
 \date{\today}
 
@@ -56,6 +58,7 @@ U=\sum_{i=1}^N \epsilon n_i
 \end{equation}
 For simplicity the energy is measured in units of $\epsilon$.
 \begin{equation}
+\label{eq:totalU2}
 q = \frac{U}{\epsilon}=\sum_{i=1} n_i
 \end{equation}
 This is equivalent to equation \ref{eq:totalU}, but implies that a specific system will have constant total energy, yet the energy distribution may change.
@@ -161,8 +164,76 @@ Equation \ref{eq:binom} gives us the multiplicity of a system as a binomial coef
 \begin{equation*}
 \Omega(N,q)=\binom{q+N-1}{q}=\frac{(q+N-1)!}{q!(N-1)!}
 \end{equation*}
-Using Stirlings's approximation, $\ln x!=x\ln x-x$, this expression can be simplified.
+Using Stirlings's approximation, $\ln x!=x\ln x-x$, this expression can be simplified for large $N$. First of all the exact formula can be simplified
+\begin{equation}
+\frac{(q+N-1)!}{q!(N-1)!} \approx \frac{(q+N)!}{q!N!}
+\end{equation}
+Now we take the natural logarithm and apply Stirling's approximation
+\begin{align}
+\ln \Omega &\approx \ln \left(\frac{(q+N)!}{q!N!}\right) = \ln (1+n)! - \ln q! - \ln N! \\
+& \approx (q+N)\ln (q+N)-(q+N) - q \ln q +q - N \ln N +N \\
+&= (q+N) \ln (q+N) - q \ln q - N \ln N \\
+&= (q+N) \ln q(1+\frac{N}{q}) - q \ln q - N \ln N \\                                                                                                                                                                                                                                                                                                                                                                                                       
+&= (q+N) (\ln q + \ln(1+\frac{N}{q})) - q \ln q - N \ln N                                                                                                                                                                                                                                                                                                                                                                                                       
+\end{align}
+A Taylor expansion will reveal that $\ln (1+x) \approx x$. Then we have
+\begin{align*}
+\ln \Omega &\approx (q+N) (\ln q + \frac{N}{q}) - q \ln q - N \ln N\\
+&= q\ln q + N + N \ln q + \frac{N^2}{q} - q\ln q - N\ln N \\
+&= N \ln \left(\frac{q}{N}\right) +N + \frac{N^2}{q} 
+\end{align*}
+Assuming $N/q << 1$, then $N^2/q$ will quickly approach zeros, and we are left with a very neat expression for the natural logarithm of the mulitiplicity
+\begin{equation}
+\label{eq:lnmulti}
+\ln \Omega (N,q) \approx N(\ln (q/N) +1)
+\end{equation}
+
+From equation \ref{eq:lnmulti} one can see that the multiplicity of a large Einstein solid must be 
+\begin{equation}
+\label{eq:largemulti}
+\Omega (N,q) \approx e^{N \ln (q/N)}e^= \left(\frac{eq}{N}\right)^N
+\end{equation}
+
+For a variety of systems, particles and energy tend to rearrange themselves until the multiplicity is at or very near its maximum value. The fact that the multiplicity tends to increase is a simple way to state the \emph{second law of thermodynamics}.
+
+Since multiplicities are very large numbers, one usually deals with the natural logarithm to the multiplicity instead. This was the reason for the rather large algebraic exercise war performed above. For historical reasons, one also multiply by a factor of Boltzmann's constant. This provides a quantity called the \emph{entropy}.
+\begin{equation}
+\label{eq:entropy}
+S \equiv k \ln \Omega
+\end{equation} 
+For a large Einsten crystal the entropy must be
+\begin{equation}
+\label{eq:einsteinentropy}
+S=k \ln (eq/N)^N = Nk[\ln (q/N) + 1]
+\end{equation}
+
+One nice property of entropy is that the total entropy of a system of several subsystemsis the sum of the entropy of the subsystems. For a two-part system a quick proof will be something like this
+\begin{equation}
+S_{tot}=k \ln \Omega_{tot} = k \ln (\Omega_A\Omega_B) = k \ln \Omega_A + k \ln \Omega_B = S_A + S_B
+\end{equation}
+
+Consider a thermal equilibrium of two Einstein crystals in thermal contact. At equiliribrium the entropy, as a function of energy, of the two crystals must be at maximum. In other words, algebraically speaking
+\begin{equation}
+\frac{\partial S_A}{\partial U_A} + \frac{\partial S_B}{\partial U_B} = 0
+\end{equation}
+where $U_k= \epsilon q_K$ (the energy of each particle times the unit of energy\footnote{This follows from equation \ref{eq:totalU} and \ref{eq:totalU2}}). 
+
+The definition of \emph{temperature} of a system is the reciprocal of the slope of its entropy vs energy graphs. Again, algebraically speaking
+\begin{equation}
+T \equiv \left(\frac{\partial S}{\partial U} \right)^{-1}
+\end{equation}
+By expanding upon the expression for entropy of an Einstein crystal (equation \ref{eq:einsteinentropy})
+\begin{equation}
+S= Nk[\ln (q/N) + 1]
+= Nk \ln U -Nk \ln (\epsilon N) + Nk
+\end{equation}
+one will find the temperature of the Einstein crystal to be
+\begin{equation}
+T = \left(\frac{\partial S}{\partial U} \right)^{-1}
+= \left(\frac{Nk}{U} \right)^{-1} = \frac{U}{Nk} 
+\end{equation}
 
 \section{The Spin System}
+The spin system is different from a system of Einstein crystals, but can be addressed in a somewhat similar approach. For a paramegnetic system with binary spins, each particle can be in two possible states.
 
 \end{document}
