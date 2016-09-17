@@ -235,25 +235,49 @@ T = \left(\frac{\partial S}{\partial U} \right)^{-1}
 \end{equation}
 
 \section{The Spin System}
-The spin system is different from a system of Einstein crystals, but can be addressed in a somewhat similar approach. For a paramegnetic system with binary spins, each particle can be in two possible states $S=+1$ or $S=-1$. Alternatively, one can call theses states "spin up" and "spin down" states, borrowing terminology from quantum mechaninics\footnote{This quickly becomes a study of a spin-$1/2$ particle system}. The energy of such a dipole depends on its orientation relative to an external magnetic field $B$. The simplest system we can consider consists of $N$ independent dipoles/spins, $S_i$. The two possible energies for a single-spin system will be $-\mu B$ and $\mu B$. 
+The spin system is different from a system of Einstein crystals, but can be addressed in a somewhat similar approach. For a paramegnetic system with binary spins, each particle can be in two possible states $S=+1$ or $S=-1$. Alternatively, one can call theses states "spin up" and "spin down" states, borrowing terminology from quantum mechaninics\footnote{This quickly becomes a study of a spin-$1/2$ particle system}. The energy of such a dipole depends on its orientation relative to an external magnetic field $B$. The simplest system we can consider consists of $N$ independent dipoles/spins, $S_i$. 
 
-If we define $N_{\uparrow}$ to be the number of dipoles that point up, and $N_{\downarrow}$ to be the number of dipoles that point down, the total number of dipoles is $N=N_{\uparrow}+N_{\downarrow}$. The net spin of the system is $N_{\uparrow}-N_{\downarrow}$ For a system of a given $N$, there will be one macrostate for each possible value of $N_{\uparrow}$ from $0$ to $N$. It is easy to see that the number of different systems is governed by combinatorical mathematics and the multiplicity of any given macrostate is therefore given by the binomial coefficient
+If we define $N_{\uparrow}$ to be the number of dipoles that point up, and $N_{\downarrow}$ to be the number of dipoles that point down, the total number of dipoles is $N=N_{\uparrow}+N_{\downarrow}$. For a system of a given $N$, there will be one macrostate for each possible value of $N_{\uparrow}$ from $0$ to $N$. It is easy to see that the number of different systems is governed by combinatorical mathematics and the multiplicity of any given macrostate is therefore given by the binomial coefficient
 \begin{equation}
 \Omega(N_{\uparrow}) = \binom{N}{N_{\uparrow}}=\frac{N!}{N_{\uparrow}!(N-N_{\uparrow})!}=\frac{N!}{N_{\uparrow}!N_{\downarrow}!}
 \end{equation}
-which is another way of saying; "how many different systems of a given number of spin up can I have?". I have supplied an attempt at a proof of the binomial coefficient in appendix \ref{app:binom}.
+which is another way of saying; "how many different systems of a given number of spin up can I have?". I have supplied an attempt at a derivation of the binomial coefficient in appendix \ref{app:binom}, for the keen reader.
+
+For the sake of symmetry, the energy levels of a single dipole in an ideal two-state paramagnet are $-\mu B$ for spin up and $\mu B$ for spin down. The total energy of the system is
+\begin{equation}
+U = \mu B(N_{\downarrow}-N_{\uparrow})
+\end{equation}
+denoting the net spin by $\nu$, it is given by the relation $2\nu = N_{\uparrow}-N_{\downarrow}$. It can be beneficial to write the total energy as a function of the net spin:
+\begin{equation}
+U = -\frac{\mu B \nu}{2}
+\end{equation} 
+
+By rewriting the number of spin up dipoles
+\begin{equation}
+N_{\uparrow}=N-N_{\downarrow}=\frac{N}{2}+\frac{N}{2}+N_{\downarrow}
+=\frac{N}{2}+\frac{N_{\uparrow}}{2}+\frac{N_{\downarrow}}{2}-\frac{2N_{\downarrow}}{2}=\frac{N}{2}+\frac{N_{\uparrow}-N_{\downarrow}}{2}=\frac{N}{2}+\nu
+\end{equation}
+and similarly for spin down dipoles
+\begin{equation}
+N_{\downarrow}=N-N_{\uparrow}=\frac{N}{2}+\frac{N}{2}+N_{\downarrow}
+=\frac{N}{2}+\frac{N_{\uparrow}}{2}+\frac{N_{\downarrow}}{2}-\frac{2N_{\uparrow}}{2}=\frac{N}{2}-\frac{N_{\uparrow}-N_{\downarrow}}{2}=\frac{N}{2}-\nu
+\end{equation}
+This in turn allows one to rewrite the multiplicity as a function of the net spin
+\begin{equation}
+\Omega (N,\nu) = \frac{N!}{\left(\frac{N}{2} +\nu\right)!\left(\frac{N}{2} -\nu\right)!}
+\end{equation}
 
 \begin{appendices}
-\section{Proof of binomial coefficient}
+\section{Deriving the binomial coefficient}
 \label{app:binom}
-This proof (if it can be called a proof) may not be rigorous enough to satisfy a mathematician, but it serves its purpose, in the true spirit of a physicist.
+This ouline may not be rigorous enough to satisfy a mathematician, but it serves its purpose, in the true spirit of a physicist.
 
 Say we have an $n$ element set and want to make ordered lists of length $k$ from this set. There will be $n$ ways to pick the first element, $n-1$ ways to pick the second, and $n-k$ ways to pick the $k$th element. Alternatively, there are
 \begin{equation}
 n(n-1)\dots(n-k)=\frac{n!}{(n-k)!}
 \end{equation}
 such sequences.
-This is all nice and dandy, but we are in reality dealing with \emph{unordered} lists. This means that we want to identify the $k!$ permutations of its elements, each of which was counted seperately above as the same list. The fix is simple! Divede by $k!$:
+This is all nice and dandy, but we are in reality dealing with \emph{unordered} lists. This means that we want to identify the $k!$ permutations of its elements, each of which was counted seperately above as the same list. The fix is simple - Divide by $k!$:
 \begin{equation}
 \frac{\frac{n!}{(n-k)!}}{k!}=\frac{n!}{k!(n-k)!}
 \end{equation}
