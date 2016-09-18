@@ -235,6 +235,8 @@ T = \left(\frac{\partial S}{\partial U} \right)^{-1}
 \end{equation}
 
 \section{The Spin System}
+
+\subsection{Theoretical background}
 The spin system is different from a system of Einstein crystals, but can be addressed in a somewhat similar approach. For a paramegnetic system with binary spins, each particle can be in two possible states $S=+1$ or $S=-1$. Alternatively, one can call theses states "spin up" and "spin down" states, borrowing terminology from quantum mechaninics\footnote{This quickly becomes a study of a spin-$1/2$ particle system}. The energy of such a dipole depends on its orientation relative to an external magnetic field $B$. The simplest system we can consider consists of $N$ independent dipoles/spins, $S_i$. 
 
 If we define $N_{\uparrow}$ to be the number of dipoles that point up, and $N_{\downarrow}$ to be the number of dipoles that point down, the total number of dipoles is $N=N_{\uparrow}+N_{\downarrow}$. For a system of a given $N$, there will be one macrostate for each possible value of $N_{\uparrow}$ from $0$ to $N$. It is easy to see that the number of different systems is governed by combinatorical mathematics and the multiplicity of any given macrostate is therefore given by the binomial coefficient
@@ -253,6 +255,7 @@ denoting the net spin by $\nu$, it is given by the relation $2\nu = N_{\uparrow}
 U = -2\mu B \nu
 \end{equation} 
 
+\subsection{A closes study of spin multiplicities}
 By rewriting the number of spin up dipoles
 \begin{equation}
 N_{\uparrow}=N-N_{\downarrow}=\frac{N}{2}+\frac{N}{2}+N_{\downarrow}
@@ -269,7 +272,7 @@ This in turn allows one to rewrite the multiplicity as a function of the net spi
 \Omega (N,\nu) = \frac{N!}{\left(\frac{N}{2} +\nu\right)!\left(\frac{N}{2} -\nu\right)!}
 \end{equation}
 
-Now I wish to approximate this function for $N>>1$. I have tried to do this with my pencil on a piece of paper, but I was quickly lost in the algebraic jungle. Instead I turn to Python symbolic computation package:
+Now I wish to approximate this function for large systems with $N>>1$. I have tried to do this with my pencil on a piece of paper, but I was quickly lost in the algebraic jungle. Instead I turn to Python symbolic computation package:
 \begin{lstlisting}
 In [1]: from sympy import *
 
@@ -302,11 +305,13 @@ The first of these terms is $\Omega(N,0)$, which is easy to see from equation \r
 \Omega(N,\nu)=\Omega(N,0)e^{-2\nu^2/N}
 \end{equation}
 
-It would be interesting to see how this approximation compares with a numberical approximation of a similar situation. The following class written in Python provides a framework where $M$ microstates are generated randomly for a system of $N$ dipoles. 
+\subsection{Numerical approximation}
+
+It would be interesting to see how this analytical approximation compares with a numberical approximation. The following class written in Python provides a framework where $M$ microstates are generated randomly for a system of $N$ dipoles. 
 
 \lstinputlisting[firstline=5, lastline=50]{scripts/RandomSpin.py}
 
-Additionally, the class includes two simple set-methods, in order to change the value for $\mu$ and $B$. An object of this class can be made with for example $M=10000$ and $N=50$. Running the \lstinline$energyHistogram(binsNumber)$ method will render a figure that compares the randomly generated spin systems to the analytical version in equation \ref{eq:omegazero}, shown in figure \ref{fig:randomspin}.
+Additionally, the class includes two simple set-methods, in order to change the value for $\mu$ and $B$. The default value for these two parameters are set to $1$, but in reality $B$ depends on the magnetic field the dipoles are subjected to, while $\mu$ is the Bohr magneton\footnote{$\mu_B=\frac{eh}{4\pi m_e}=9.247\times 10^{-24} J/T =5.788\times 10^{-5} eV/T$} An object of this class can be made with for example $M=10000$ and $N=50$. Running the \lstinline$energyHistogram()$ method will render a figure that compares the randomly generated spin systems to the analytical version in equation \ref{eq:omegazero}, shown in figure \ref{fig:randomspin}.
 
 \begin{figure}[h]
   \centering
@@ -316,6 +321,8 @@ Additionally, the class includes two simple set-methods, in order to change the 
 \end{figure}
 
 Figure \ref{fig:randomspin} shows that the randomly generated microstates are close to the analytical approximation for large $N$. The randomly generated microstates seems to have a distribution with slightly larger kurtosis.
+
+\subsection{Thermodynamic properties}
 
 Now, we will return to describing the system using exact, and not the approximate, multiplicity. The \emph{entropy} $S$ as a function of $N$ and $N_{\uparrow}$ will, using Stirling's approximation, be
 \begin{align}

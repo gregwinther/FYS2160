@@ -4,15 +4,13 @@ import scipy.misc
 
 class RandomSpin():
 	"""Generates M microstates randomly for a system
-		of N u/down (+1 or -1) spins"""
+		of N up/down (+1 or -1) spins"""
 	def __init__(self, M, N):
 
 		self.M = M
 		self.N = N
 
 		# mu and B are set to 1 as default.
-		# In reality for a two-state paramagnet 
-		# mu is the Bohr magneton
 		self.mu = 1.0
 		self.B = 1.0
 
@@ -20,7 +18,7 @@ class RandomSpin():
 
 		for i in range(M):
 			for j in range(N):
-				# Generates ranom numers -1 or +1
+				# Generates random numers -1 or +1
 				self.microstates[i,j] = np.random.randint(2)*2 -1
 
 	def energyHistogram(self, binsNumber=10):
