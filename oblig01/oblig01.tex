@@ -264,8 +264,42 @@ N_{\downarrow}=N-N_{\uparrow}=\frac{N}{2}+\frac{N}{2}+N_{\downarrow}
 \end{equation}
 This in turn allows one to rewrite the multiplicity as a function of the net spin
 \begin{equation}
+\label{eq:netsimply}
 \Omega (N,\nu) = \frac{N!}{\left(\frac{N}{2} +\nu\right)!\left(\frac{N}{2} -\nu\right)!}
 \end{equation}
+
+Now I wish to approximate this function for $N>>1$. I have tried to do this with my pencil on a piece of paper, but I was quickly lost in the algebraic jungle. Instead I turn to Python symbolic computation package:
+\begin{lstlisting}
+In [1]: from sympy import *
+
+In [2]: nu = symbols('nu')
+
+In [3]: N = symbols('N')
+
+In [4]: omega = factorial(N) / 
+(factorial(N/2+nu)*factorial(N/2-nu))
+
+In [5]: lnOmega = log(omega)
+
+In [6]: TlnOmega = series(lnOmega, nu, n=3)
+
+In [7]: simplify(TlnOmega)
+Out[7]: log(factorial(N)/(factorial(N/2))**2) 
+	- nu**2*polygamma(1, N/2 + 1) + O(nu**3)
+\end{lstlisting}
+And there we have it, at least most of it. The Polygamma-function is a function which can roughly be approximated by
+\begin{equation}
+\Psi(x) \approx \ln x -(1/2x) - (1/12x^2) + \dots
+\end{equation}
+The first argument in the sumpy Polygamma function is the order of differentiation, while the second is the evaluation point. From the listing above, written in a plainer mathematical typeset, we have
+\begin{equation}
+\ln \Omega(N,\nu)= \ln \left( \frac{N!}{\frac{N}{2}!\frac{N}{2}!} \right) - \frac{2\nu^2}{N}
+\end{equation}
+The first of these terms is $\Omega(N,0)$, which is easy to see from equation \ref{eq:netsimply}. The second term remains as it is, and we can write
+\begin{equation}
+\Omega(N,\nu)=\Omega(N,0)e^{-2\nu^2/N}
+\end{equation}
+
 
 \begin{appendices}
 \section{Deriving the binomial coefficient}
@@ -281,7 +315,7 @@ This is all nice and dandy, but we are in reality dealing with \emph{unordered} 
 \begin{equation}
 \frac{\frac{n!}{(n-k)!}}{k!}=\frac{n!}{k!(n-k)!}
 \end{equation}
-This is the binomial coefficient. Q.E.D.
+This is the binomial coefficient.
 \end{appendices}
 
 \end{document}

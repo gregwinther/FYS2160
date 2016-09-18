@@ -1,5 +1,6 @@
 import numpy as np 
 from matplotlib import pyplot as plt
+import scipy.misc
 
 class RandomSpin():
 	"""Generates M microstates randomly for a system
@@ -10,7 +11,7 @@ class RandomSpin():
 		self.N = N
 
 		# mu and B are set to 1 as default.
-		# in reality for a two-state paramagnet 
+		# In reality for a two-state paramagnet 
 		# mu is the Bohr magneton
 		self.mu = 1.0
 		self.B = 1.0
@@ -31,12 +32,21 @@ class RandomSpin():
 		U = - 2 *self.mu * self.B * net_spin
 
 		# Analytical solution
+		nu = np.linspace(-self.N,self.N,self.M)
+		prob = self.M*\
+			scipy.misc.comb(self.N,self.N/2)*\
+			np.exp(-nu*nu/self.N)/\
+			2**(self.N)
+			
 
-		plt.hist(U, bins=binsNumber)
+		plt.hist(U, bins=binsNumber, label="Numerical")
+		plt.plot(nu, prob, label="Analytical", linewidth=2)
 		plt.title("Histogram of M = "+ str(self.M) \
 			+ " and  N = " + str(self.N))
 		plt.xlabel("Frequency")
 		plt.ylabel("Energy (U)")
+		plt.xlim([-self.N/2,self.N/2])
+		plt.legend()
 		plt.show()
 
 	# Setter for mu
@@ -49,7 +59,8 @@ class RandomSpin():
 
 
 if __name__ == '__main__':
-
-	spin50 =  RandomSpin(10000,50)
-	spin50.energyHistogram(15) # Argument: 15 bins
+	M = 10000
+	N = 50
+	spin50 =  RandomSpin(M, N)
+	spin50.energyHistogram(N) # argument is number of bins
 		
