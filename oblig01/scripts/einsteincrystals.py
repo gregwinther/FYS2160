@@ -64,25 +64,20 @@ class EinsteinCrystal:
 		return self.q_A, self.probs
 
 
-States1 = EinsteinCrystal(6, 2, 2)
-States2 = EinsteinCrystal(100, 50, 50)
-States1.table()
-States1.PDF()
-States2.PDF()
-q_A, probs = States2.getPDF()
+# Example run of class program
+if __name__ == '__main__':
 
-plt.plot(q_A, probs)
-plt.title("PDF of two Einstein crystals  "+r'$q=100, N_A=N_B=50$')
-plt.xlabel(r'$q_A$', fontsize=18)
-plt.ylabel(r'$P(q_A)$', fontsize=18)
-plt.show()
+	States1 = EinsteinCrystal(6, 2, 2)
+	States2 = EinsteinCrystal(100, 50, 50)
+	States1.table()
+	States1.PDF()
+	States2.PDF()
+	q_A, probs = States2.getPDF()
 
-large = probs[0]
-for i in range(len(q_A)):
-    if probs[i] > large:
-        large = probs[i]
-        maxIndex = i
-
-print("Max prob: ")
-print("q_A: ", q_A[maxIndex])
-print("prob: ", probs[maxIndex])
+	# Plotting PDF of large system states
+	# This functionality could arguable be inside a method
+	plt.plot(q_A, probs)
+	plt.title("PDF of two Einstein crystals  "+r'$q=100, N_A=N_B=50$')
+	plt.xlabel(r'$q_A$', fontsize=18)
+	plt.ylabel(r'$P(q_A)$', fontsize=18)
+	plt.show()

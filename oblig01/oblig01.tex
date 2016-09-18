@@ -122,18 +122,18 @@ These values have been calculated using the binomial coefficient in equation \re
 
 The following source code listing provides a way to compute the same numbers with a class in Python.
 
-\lstinputlisting[firstline=4, lastline=28]{einsteincrystals.py}
+\lstinputlisting[firstline=4, lastline=28]{scripts/einsteincrystals.py}
 
 An object of this class defines a system consisting of two subsystems, $A$ and $B$. To get information about the states and multiplicity of the system I have written the following method\footnote{I am uncertain what names to use: object or class instance; and method or function. My sincere apologies to the reader if some other words than than the ones I have chosen are the norm for Python.}. This method displays information about smaller systems quite well.
 
-\lstinputlisting[firstline=31, lastline=43]{einsteincrystals.py}
+\lstinputlisting[firstline=31, lastline=43]{scripts/einsteincrystals.py}
 
 To compute probability of every state and to plot det probability density function I have writting this next method method which computes the probabilities for the macrostates $q_A$. The probability are computed by dividing all possible microstates for a given macrostate by every possible micorstate.
 \begin{equation}
 p(q_A)=\frac{\Omega_{i,tot}}{\sum\Omega_{i,tot}}
 \end{equation}
 
-\lstinputlisting[firstline=46, lastline=61]{einsteincrystals.py}
+\lstinputlisting[firstline=46, lastline=61]{scripts/einsteincrystals.py}
 The method prints to terminal the probabilities that are given in table \ref{tab:einsteinprobs}.
 \begin{table}[h]
 \caption{Probabilities of the macrostates for two Einsten crystals where $q=6$ and $N_A=N_B=2$}
@@ -155,7 +155,7 @@ The maximium number of microstates before the two crystals came in thermal conta
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.9\linewidth]{EinsteinPDF.png}
+  \includegraphics[width=0.9\linewidth]{figures/EinsteinPDF.png}
   \caption{Probability density function for two interconnected Einstein crystals with $q=100$ and $N_A=N_B=50$}
   \label{fig:EinsteinPDF}
 \end{figure}
@@ -192,7 +192,7 @@ Assuming $N/q << 1$, then $N^2/q$ will quickly approach zeros, and we are left w
 From equation \ref{eq:lnmulti} one can see that the multiplicity of a large Einstein solid must be 
 \begin{equation}
 \label{eq:largemulti}
-\Omega (N,q) \approx e^{N \ln (q/N)}e^= \left(\frac{eq}{N}\right)^N
+\Omega (N,q) \approx e^{N \ln (q/N)}e^N= \left(\frac{eq}{N}\right)^N
 \end{equation}
 
 For a variety of systems, particles and energy tend to rearrange themselves until the multiplicity is at or very near its maximum value. The fact that the multiplicity tends to increase is a simple way to state the \emph{second law of thermodynamics}.

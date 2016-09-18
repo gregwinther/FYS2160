@@ -9,9 +9,7 @@ class RandomSpin():
 		self.M = M
 		self.N = N
 
-		# mu and B are set to 1 as default.
-		# in reality for a two-state paramagnet 
-		# mu is the Bohr magneton
+		# mu and B are set to one as standard.
 		self.mu = 1.0
 		self.B = 1.0
 
@@ -22,17 +20,14 @@ class RandomSpin():
 				# Generates ranom numers -1 or +1
 				self.microstates[i,j] = np.random.randint(2)*2 -1
 
-	def energyHistogram(self, binsNumber=10):
+	def energyHistogram(self):
 		net_spin = np.zeros(self.M)
 		for i in range(self.M):
 			net_spin[i] = float(sum(self.microstates[i,:])) / 2
 		
 		# Energy
-		U = - 2 *self.mu * self.B * net_spin
-
-		# Analytical solution
-
-		plt.hist(U, bins=binsNumber)
+		U = - 2 *self.mu * self.B * net_spin 
+		plt.hist(U)
 		plt.title("Histogram of M = "+ str(self.M) \
 			+ " and  N = " + str(self.N))
 		plt.xlabel("Frequency")
@@ -51,5 +46,5 @@ class RandomSpin():
 if __name__ == '__main__':
 
 	spin50 =  RandomSpin(10000,50)
-	spin50.energyHistogram(15) # Argument: 15 bins
+	spin50.energyHistogram()
 		
