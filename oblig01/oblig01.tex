@@ -122,18 +122,18 @@ These values have been calculated using the binomial coefficient in equation \re
 
 The following source code listing provides a way to compute the same numbers with a class in Python.
 
-\lstinputlisting[firstline=4, lastline=28]{scripts/einsteincrystals.py}
+\lstinputlisting[firstline=4, lastline=28]{scripts/EinsteinCrystal.py}
 
 An object of this class defines a system consisting of two subsystems, $A$ and $B$. To get information about the states and multiplicity of the system I have written the following method\footnote{I am uncertain what names to use: object or class instance; and method or function. My sincere apologies to the reader if some other words than than the ones I have chosen are the norm for Python.}. This method displays information about smaller systems quite well.
 
-\lstinputlisting[firstline=31, lastline=43]{scripts/einsteincrystals.py}
+\lstinputlisting[firstline=31, lastline=43]{scripts/EinsteinCrystal.py}
 
 To compute probability of every state and to plot det probability density function I have writting this next method method which computes the probabilities for the macrostates $q_A$. The probability are computed by dividing all possible microstates for a given macrostate by every possible micorstate.
 \begin{equation}
 p(q_A)=\frac{\Omega_{i,tot}}{\sum\Omega_{i,tot}}
 \end{equation}
 
-\lstinputlisting[firstline=46, lastline=61]{scripts/einsteincrystals.py}
+\lstinputlisting[firstline=46, lastline=61]{scripts/EinsteinCrystal.py}
 The method prints to terminal the probabilities that are given in table \ref{tab:einsteinprobs}.
 \begin{table}[h]
 \caption{Probabilities of the macrostates for two Einsten crystals where $q=6$ and $N_A=N_B=2$}
@@ -241,10 +241,11 @@ If we define $N_{\uparrow}$ to be the number of dipoles that point up, and $N_{\
 \begin{equation}
 \Omega(N_{\uparrow}) = \binom{N}{N_{\uparrow}}=\frac{N!}{N_{\uparrow}!(N-N_{\uparrow})!}=\frac{N!}{N_{\uparrow}!N_{\downarrow}!}
 \end{equation}
-which is another way of saying; "how many different systems of a given number of spin up can I have?". I have supplied an attempt at a derivation of the binomial coefficient in appendix \ref{app:binom}, for the keen reader.
+which is another way of saying; "how many different systems of a given number of spin up can I have?". I have supplied an attempt at a derivation of the binomial coefficient in appendix \ref{app:binom}, for the keen reader\footnote{Another way to denote the number of spin up dipoles is by $S_+$. I find this to be easily confused with the entropy $S$ and therefore use the notation $N_{\uparrow}$ used many other places, like Schroeder's Introduction to Thermal Physics}.
 
 For the sake of symmetry, the energy levels of a single dipole in an ideal two-state paramagnet are $-\mu B$ for spin up and $\mu B$ for spin down. The total energy of the system is
 \begin{equation}
+\label{eq:energyspin1}
 U = \mu B(N_{\downarrow}-N_{\uparrow})
 \end{equation}
 denoting the net spin by $\nu$, it is given by the relation $2\nu = N_{\uparrow}-N_{\downarrow}$. It can be beneficial to write the total energy as a function of the net spin:
@@ -297,9 +298,55 @@ The first argument in the sumpy Polygamma function is the order of differentiati
 \end{equation}
 The first of these terms is $\Omega(N,0)$, which is easy to see from equation \ref{eq:netsimply}. The second term remains as it is, and we can write
 \begin{equation}
+\label{eq:omegazero}
 \Omega(N,\nu)=\Omega(N,0)e^{-2\nu^2/N}
 \end{equation}
 
+It would be interesting to see how this approximation compares with a numberical approximation of a similar situation. The following class written in Python provides a framework where $M$ microstates are generated randomly for a system of $N$ dipoles. 
+
+\lstinputlisting[firstline=5, lastline=50]{scripts/RandomSpin.py}
+
+Additionally, the class includes two simple set-methods, in order to change the value for $\mu$ and $B$. An object of this class can be made with for example $M=10000$ and $N=50$. Running the \lstinline$energyHistogram(binsNumber)$ method will render a figure that compares the randomly generated spin systems to the analytical version in equation \ref{eq:omegazero}, shown in figure \ref{fig:randomspin}.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.9\linewidth]{figures/RandomSpinM10000N50.png}
+  \caption{Histogram of $M=10000$ randomly generated microstates in a binary spin system of $N=50$ dipoles.}
+  \label{fig:randomspin}
+\end{figure}
+
+Figure \ref{fig:randomspin} shows that the randomly generated microstates are close to the analytical approximation for large $N$. The randomly generated microstates seems to have a distribution with slightly larger kurtosis.
+
+Now, we will return to describing the system using exact, and not the approximate, multiplicity. The \emph{entropy} $S$ as a function of $N$ and $N_{\uparrow}$ will, using Stirling's approximation, be
+\begin{align}
+\frac{S}{k} &= \ln \left(\frac{N!}{N_{\uparrow}!N-N_{\uparrow}} \right) = \ln N! - \ln N_{\uparrow}! - \ln (N-N_{\uparrow})! \\
+ & \approx N \ln N - N - N_{\uparrow}\ln N_{\uparrow}-N_{\uparrow} -(N-N_{\uparrow}) \ln (N-N_{\uparrow}) - (N- N_{\uparrow}) \\
+ &= N \ln N - N_{\uparrow}\ln N_{\uparrow} - (N-N_{\uparrow}) \ln (N-N_{\uparrow}) 
+\end{align}
+
+The \emph{temperature} is given by
+\begin{equation}
+\label{eq:spintemp}
+\frac{1}{T} = \frac{\partial S}{\partial U} = \frac{\partial S}{\partial N_{\uparrow}}\frac{\partial N_{\uparrow}}{\partial U}
+\end{equation}
+To solve this I first need to rearrange the energy in equation \ref{eq:energyspin1} a bit
+\begin{equation}
+U = \mu B(N_{\downarrow} -N_{\uparrow}) = \mu B (N-2N_{\uparrow})
+\rightarrow N_{\uparrow} = \frac{1}{2}\left(N -\frac{U}{\mu B} \right)
+\end{equation} 
+Knowing this, the first factor on the right hand side of equation \ref{eq:spintemp} is
+\begin{align}
+\frac{\partial S}{\partial N_{\uparrow}} &= k[-\ln N_{\uparrow}-1 +\ln (N-N_{\uparrow}) +1] \\
+&= k \ln \left(\frac{N-N_{\uparrow}}{N_{\uparrow}} \right) = k \ln \left( \frac{N+U/\mu B}{N-U/\mu B} \right)
+\end{align}
+and the second factor is
+\begin{equation}
+\frac{\partial N_{\uparrow}}{\partial U} = -\frac{1}{2 \mu B} 
+\end{equation}
+Putting the pieces together, the reciprocal of the temperature must be
+\begin{equation}
+\frac{1}{T} = -\frac{k}{2\mu B}\ln \left(\frac{N+U/\mu B}{N-U/\mu B} \right)
+\end{equation}
 
 \begin{appendices}
 \section{Deriving the binomial coefficient}
@@ -311,7 +358,7 @@ Say we have an $n$ element set and want to make ordered lists of length $k$ from
 n(n-1)\dots(n-k)=\frac{n!}{(n-k)!}
 \end{equation}
 such sequences.
-This is all nice and dandy, but we are in reality dealing with \emph{unordered} lists. This means that we want to identify the $k!$ permutations of its elements, each of which was counted seperately above as the same list. The fix is simple - Divide by $k!$:
+This is all nice and dandy, but we are in reality dealing with \emph{unordered} lists. This means that we want to identify the $k!$ permutations of its elements, each of which was counted seperately above as the same list. The fix is simple - divide by $k!$
 \begin{equation}
 \frac{\frac{n!}{(n-k)!}}{k!}=\frac{n!}{k!(n-k)!}
 \end{equation}
