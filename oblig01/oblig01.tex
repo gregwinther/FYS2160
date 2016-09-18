@@ -24,7 +24,7 @@
  	backgroundcolor=\color{mygray}
 }
 
-\title[Micro and Macrostates in Thermal Physics]{Micro- and Macrostates in Thermal Physics \\
+\title[Micro- and Macrostates in Thermal Physics]{Micro- and Macrostates in Thermal Physics \\
 	\hrulefill\fbox{FYS2160}\hrulefill}
 	
 \author[Winther-Larsen]{Sebastian G. Winther-Larsen\\
@@ -39,7 +39,7 @@
 \tableofcontents
 
 \section{Introduction}
-This is a brief study of micro- and macrostates in thermal phyics and statistical mechanics\footnote{I have come to realise that these two terms are somewhat interchangeable}. In statistical mechanics, a microstate is a specific microscopic configuration of a thermodynamic system that the system may occupy with a certain probability in the course of its thermal fluctuations. In contrast, the macrostate of a system refers to its macroscopic properties, such as its temperature, pressure, volume and density. Two models are introduced in this study; \emph{the Einstein crystal}, which could respresent a silicone crystal, and the \emph{spin system}, which could represent a system of magnetic dipoles
+This is a brief study of micro- and macrostates in thermal phyics and statistical mechanics\footnote{I have come to realise that these two terms are somewhat interchangeable}. In statistical mechanics, a microstate is a specific microscopic configuration of a thermodynamic system that the system may occupy with a certain probability in the course of its thermal fluctuations. In contrast, the macrostate of a system refers to its macroscopic properties, such as its temperature, pressure, volume and density. Two models are introduced in this study; \emph{the Einstein crystal}, which could respresent a silicone crystal, and the \emph{spin system}, which could represent a system of paramagnetic dipoles
 
 \section{The Einstein Crystal}
 
@@ -89,14 +89,14 @@ Plugging in for $N=3$ and $q=3$ indeed yields the expected result
 \end{equation*}
 
 \subsection{Two subsystems in thermal contact}
-Consider two initially isolated subsystems, system $A$ with $N_A=2$ oscillators and energy $q_A=5$; and system $B$ with $N_B=2$ oscillators and energy $q_B=1$. Subsystem $A$ has the following six possible microstates 
-\begin{equation}
+Consider two initially isolated subsystems, system $A$ with $N_A=2$ oscillators and energy $q_A=5$; and system $B$ with $N_B=2$ oscillators and energy $q_B=1$. Subsystem $A$ has six possible microstates 
+\begin{equation*}
 \{0,5\},\{1,4\},\{2,3\},\{3,2\},\{4,1\},\{5,0\}
-\end{equation} 
+\end{equation*} 
 and subsystem $B$ will have the following two microstates
-\begin{equation}
+\begin{equation*}
 \{0,1\},\{1,0\}
-\end{equation}
+\end{equation*}
 All the microstates from one of the subsystems can be combined with any from the othes system giving a total number of $6\cdot2=12$ possible microstates.
 
 Now, let the two subsystems be put in thermal contact. This means that they can exchange energy, but that the number of particles and volume of each subsystem does not change. The total energy ($q=q_A+q_B=6$) can be distributed between the two subsystems. The possible values of $q_k=q-q_{k^c}$ where $k \in \{A,B\}$. $k^c$ is the complement of $k$, whatever $k$ is not. It follows that the possible energy values must be $q_k \in [0,q]=[0,6]$.
@@ -122,13 +122,13 @@ These values have been calculated using the binomial coefficient in equation \re
 
 The following source code listing provides a way to compute the same numbers with a class in Python.
 
-\lstinputlisting[firstline=4, lastline=28]{scripts/EinsteinCrystal.py}
+\lstinputlisting[firstline=5, lastline=29]{scripts/EinsteinCrystal.py}
 
-An object of this class defines a system consisting of two subsystems, $A$ and $B$. To get information about the states and multiplicity of the system I have written the following method\footnote{I am uncertain what names to use: object or class instance; and method or function. My sincere apologies to the reader if some other words than than the ones I have chosen are the norm for Python.}. This method displays information about smaller systems quite well.
+An object of this class defines a system consisting of two subsystems, $A$ and $B$. To get information about the states and multiplicity of the system I have written the following method\footnote{I am uncertain what names to use: object or class instance; method or function. My sincere apologies to the reader if some other words than than the ones I have chosen are the norm for Python.}. This method displays information about smaller systems quite well.
 
-\lstinputlisting[firstline=31, lastline=43]{scripts/EinsteinCrystal.py}
+\lstinputlisting[firstline=32, lastline=44]{scripts/EinsteinCrystal.py}
 
-To compute probability of every state and to plot det probability density function I have writting this next method method which computes the probabilities for the macrostates $q_A$. The probability are computed by dividing all possible microstates for a given macrostate by every possible micorstate.
+To compute probability of every state and to plot det probability density function I have written this next method method which computes the probabilities for the macrostates $q_A$. The probability are computed by dividing all possible microstates for a given macrostate by every possible micorstate.
 \begin{equation}
 p(q_A)=\frac{\Omega_{i,tot}}{\sum\Omega_{i,tot}}
 \end{equation}
@@ -151,7 +151,7 @@ The method prints to terminal the probabilities that are given in table \ref{tab
 \label{tab:einsteinprobs}
 \end{table}
 
-The maximium number of microstates before the two crystals came in thermal contact was only $\sum\Omega_{i,tot}=12$. For the interconnected system, the number of allows microstates have risen dramatically to $\sum\Omega_{i,tot}=84$. Another aspect to draw attention to is that the highest number of possible microstates for a givin macrostate is highest when the energy in the crystals, $q_A$ and $q_b$ are similar. This is clear from looking at table \ref{tab:einsteinmacro}. It would be intersting to see if the same holds true for an even larger system. Figure \ref{fig:EinsteinPDF} shows the an approximation of a probability density function for the two crystals when the parameters are increased to $q=100$ and $N_A=N_B=50$. The tendency is very clear, as we see the graph forms a characteristic bell curve with a peak at $q_A=50$, where the energy of the two crystals are most similar. The probability for this exact macrostate is $p(q_A=50) \approx 5.6\%$.
+The maximium number of microstates before the two crystals came in thermal contact was only $\sum\Omega_{i,tot}=12$. For the interconnected system, the number of allows microstates have risen dramatically to $\sum\Omega_{i,tot}=84$. Another aspect to draw attention to is that the highest number of possible microstates for a givin macrostate is highest when the energy in the crystals, $q_A$ and $q_b$ are similar. This is clear from looking at table \ref{tab:einsteinmacro}. It would be intersting to see if the same holds true for an even larger system. Figure \ref{fig:EinsteinPDF} shows the an approximation of a probability density function for the two crystals when the parameters are increased to $q=100$ and $N_A=N_B=50$. The tendency is even clearer in a larger system, as we see the graph forms a characteristic bell curve with a peak at $q_A=50$, where the energy of the two crystals are most similar. The probability for this exact macrostate is $p(q_A=50) \approx 5.6\%$.
 
 \begin{figure}[h]
   \centering
@@ -165,11 +165,11 @@ Equation \ref{eq:binom} gives us the multiplicity of a system as a binomial coef
 \begin{equation*}
 \Omega(N,q)=\binom{q+N-1}{q}=\frac{(q+N-1)!}{q!(N-1)!}
 \end{equation*}
-Using Stirlings's approximation, $\ln x!=x\ln x-x$, this expression can be simplified for large $N$. First of all the exact formula can be simplified
+Using Stirlings's approximation, $\ln x!=x\ln x-x$, this expression can be rewritten for large $N$. First of all the exact formula can be approximated. When $N>>1$, the number $1$ i negligible
 \begin{equation}
 \frac{(q+N-1)!}{q!(N-1)!} \approx \frac{(q+N)!}{q!N!}
 \end{equation}
-Now we take the natural logarithm and apply Stirling's approximation
+Now I take the natural logarithm and apply Stirling's approximation
 \begin{align}
 \ln \Omega &\approx \ln \left(\frac{(q+N)!}{q!N!}\right) = \ln (1+n)! - \ln q! - \ln N! \\
 & \approx (q+N)\ln (q+N)-(q+N) - q \ln q +q - N \ln N +N \\
@@ -177,7 +177,7 @@ Now we take the natural logarithm and apply Stirling's approximation
 &= (q+N) \ln q(1+\frac{N}{q}) - q \ln q - N \ln N \\                                                                                                                                                                                                                                                                                                                                                                                                       
 &= (q+N) (\ln q + \ln(1+\frac{N}{q})) - q \ln q - N \ln N                                                                                                                                                                                                                                                                                                                                                                                                       
 \end{align}
-A Taylor expansion will reveal that $\ln (1+x) \approx x$. Then we have
+A Taylor expansion will reveal that $\ln (1+x) \approx x$. Then I have
 \begin{align*}
 \ln \Omega &\approx (q+N) (\ln q + \frac{N}{q}) - q \ln q - N \ln N\\
 &= q\ln q + N + N \ln q + \frac{N^2}{q} - q\ln q - N\ln N \\
@@ -197,7 +197,7 @@ From equation \ref{eq:lnmulti} one can see that the multiplicity of a large Eins
 
 For a variety of systems, particles and energy tend to rearrange themselves until the multiplicity is at or very near its maximum value. The fact that the multiplicity tends to increase is a simple way to state the \emph{second law of thermodynamics}.
 
-Since multiplicities are very large numbers, one usually deals with the natural logarithm to the multiplicity instead. This was the reason for the rather large algebraic exercise war performed above. For historical reasons, one also multiply by a factor of Boltzmann's constant. This provides a quantity called the \emph{entropy}.
+Since multiplicities are very large numbers, one usually deals with the natural logarithm to the multiplicity instead. This was the reason for the rather large algebraic exercise performed above. For historical reasons, one also multiply by a factor of Boltzmann's constant. This provides a quantity called the \emph{entropy}.
 \begin{equation}
 \label{eq:entropy}
 S \equiv k \ln \Omega
@@ -208,7 +208,7 @@ For a large Einsten crystal the entropy must be
 S=k \ln (eq/N)^N = Nk[\ln (q/N) + 1]
 \end{equation}
 
-One nice property of entropy is that the total entropy of a system of several subsystemsis the sum of the entropy of the subsystems. For a two-part system a quick proof will be something like this
+One nice property of entropy is that the total entropy of a system of several subsystems is the sum of the entropy of the subsystems. For a two-part system a quick proof will be something like this
 \begin{equation}
 S_{tot}=k \ln \Omega_{tot} = k \ln (\Omega_A\Omega_B) = k \ln \Omega_A + k \ln \Omega_B = S_A + S_B
 \end{equation}
@@ -237,13 +237,13 @@ T = \left(\frac{\partial S}{\partial U} \right)^{-1}
 \section{The Spin System}
 
 \subsection{Theoretical background}
-The spin system is different from a system of Einstein crystals, but can be addressed in a somewhat similar approach. For a paramegnetic system with binary spins, each particle can be in two possible states $S=+1$ or $S=-1$. Alternatively, one can call theses states "spin up" and "spin down" states, borrowing terminology from quantum mechaninics\footnote{This quickly becomes a study of a spin-$1/2$ particle system}. The energy of such a dipole depends on its orientation relative to an external magnetic field $B$. The simplest system we can consider consists of $N$ independent dipoles/spins, $S_i$. 
+The spin system is different from a system of Einstein crystals, but can be addressed in a somewhat similar approach. For a paramegnetic system with binary spins, each particle (dipole) can be in two possible states $S=+1$ or $S=-1$. Alternatively, one can call theses states "spin up" and "spin down" states, borrowing terminology from quantum mechanics\footnote{This quickly becomes a study of a spin-$1/2$ particle system}. The energy of such a dipole depends on its orientation relative to an external magnetic field $B$. The simplest system we can consider consists of $N$ independent dipoles/spins, $S_i$. 
 
 If we define $N_{\uparrow}$ to be the number of dipoles that point up, and $N_{\downarrow}$ to be the number of dipoles that point down, the total number of dipoles is $N=N_{\uparrow}+N_{\downarrow}$. For a system of a given $N$, there will be one macrostate for each possible value of $N_{\uparrow}$ from $0$ to $N$. It is easy to see that the number of different systems is governed by combinatorical mathematics and the multiplicity of any given macrostate is therefore given by the binomial coefficient
 \begin{equation}
 \Omega(N_{\uparrow}) = \binom{N}{N_{\uparrow}}=\frac{N!}{N_{\uparrow}!(N-N_{\uparrow})!}=\frac{N!}{N_{\uparrow}!N_{\downarrow}!}
 \end{equation}
-which is another way of saying; "how many different systems of a given number of spin up can I have?". I have supplied an attempt at a derivation of the binomial coefficient in appendix \ref{app:binom}, for the keen reader\footnote{Another way to denote the number of spin up dipoles is by $S_+$. I find this to be easily confused with the entropy $S$ and therefore use the notation $N_{\uparrow}$ used many other places, like Schroeder's Introduction to Thermal Physics}.
+which is another way of saying; "how many different systems of a given number of spin up can I have?". I have supplied an attempt at a derivation of the binomial coefficient in appendix \ref{app:binom}, for the keen reader\footnote{Another way to denote the number of spin up dipoles is by $S_+$. I find this to be easily confused with the entropy $S$ and therefore use the notation $N_{\uparrow}$ used many other places, like in Schroeder's An Introduction to Thermal Physics}.
 
 For the sake of symmetry, the energy levels of a single dipole in an ideal two-state paramagnet are $-\mu B$ for spin up and $\mu B$ for spin down. The total energy of the system is
 \begin{equation}
@@ -272,7 +272,7 @@ This in turn allows one to rewrite the multiplicity as a function of the net spi
 \Omega (N,\nu) = \frac{N!}{\left(\frac{N}{2} +\nu\right)!\left(\frac{N}{2} -\nu\right)!}
 \end{equation}
 
-Now I wish to approximate this function for large systems with $N>>1$. I have tried to do this with my pencil on a piece of paper, but I was quickly lost in the algebraic jungle. Instead I turn to Python symbolic computation package:
+Now I wish to approximate this function for large systems with $N>>1$. I have tried to do this with my pencil on a piece of paper, but I was quickly lost in the algebraic jungle. Instead I turn to Python's symbolic computation package:
 \begin{lstlisting}
 In [1]: from sympy import *
 
@@ -309,7 +309,7 @@ The first of these terms is $\Omega(N,0)$, which is easy to see from equation \r
 
 It would be interesting to see how this analytical approximation compares with a numberical approximation. The following class written in Python provides a framework where $M$ microstates are generated randomly for a system of $N$ dipoles. 
 
-\lstinputlisting[firstline=5, lastline=50]{scripts/RandomSpin.py}
+\lstinputlisting[firstline=5, lastline=48]{scripts/RandomSpin.py}
 
 Additionally, the class includes two simple set-methods, in order to change the value for $\mu$ and $B$. The default value for these two parameters are set to $1$, but in reality $B$ depends on the magnetic field the dipoles are subjected to, while $\mu$ is the Bohr magneton\footnote{$\mu_B=\frac{eh}{4\pi m_e}=9.247\times 10^{-24} J/T =5.788\times 10^{-5} eV/T$} An object of this class can be made with for example $M=10000$ and $N=50$. Running the \lstinline$energyHistogram()$ method will render a figure that compares the randomly generated spin systems to the analytical version in equation \ref{eq:omegazero}, shown in figure \ref{fig:randomspin}.
 
@@ -324,7 +324,7 @@ Figure \ref{fig:randomspin} shows that the randomly generated microstates are cl
 
 \subsection{Thermodynamic properties}
 
-Now, we will return to describing the system using exact, and not the approximate, multiplicity. The \emph{entropy} $S$ as a function of $N$ and $N_{\uparrow}$ will, using Stirling's approximation, be
+Now, I will return to describing the system using exact, and not the approximate, multiplicity. The \emph{entropy} $S$ as a function of $N$ and $N_{\uparrow}$ will, using Stirling's approximation, be
 \begin{align}
 \frac{S}{k} &= \ln \left(\frac{N!}{N_{\uparrow}!N-N_{\uparrow}} \right) = \ln N! - \ln N_{\uparrow}! - \ln (N-N_{\uparrow})! \\
  & \approx N \ln N - N - N_{\uparrow}\ln N_{\uparrow}-N_{\uparrow} -(N-N_{\uparrow}) \ln (N-N_{\uparrow}) - (N- N_{\uparrow}) \\
