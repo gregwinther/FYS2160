@@ -1,0 +1,60 @@
+\documentclass[10pt,a4paper]{amsart}
+
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage[]{hyperref}
+
+\lstset{
+	frame = single,
+	language = Python,
+	showstringspaces = false,
+	tabsize = 2,
+	otherkeywords = {self},
+	keywordstyle = \color{blue},
+	identifierstyle=\color{deepgreen},
+ 	stringstyle=\color{orange},
+ 	backgroundcolor=\color{mygray}
+}
+
+\title[Rotation of Diatomic Molecules]{Rotation of Diatomic Molecules \\
+	\hrulefill\fbox{FYS2160}\hrulefill}
+	
+\author[Winther-Larsen]{Sebastian G. Winther-Larsen\\
+\href{https://github.com/gregwinther/FYS2160/}{\texttt{github.com/gregwinther}}}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{Introduction}
+This study shows how to connect a microscopic and macroscopic representation of a canonical system, as system with given $N$, $V$ and $T$ (number of particles/molecules, volume of the system and temperature respectively). A general method can be applied to all canonical systems. First, finding the partition function. Second, one derives a function for Hermholtz free energy. Lastly, the remaining interesting aspects of the system can be found, like the entropy and heat capacity.
+
+\section{A simplified model system}
+In this simple system we look at a diatomic molecule, which at low temperatures can be in four different states, $i=1,2,3,4$, with energies $\varepsilon_i=\varepsilon$, $\varepsilon_2=\varepsilon_3=\varepsilon_4=2\varepsilon$. In other words, this system has two possible energies, $\varepsilon$ and $2\varepsilon$. The highest energy has a degeneracy of $3$.
+
+The partition function is found by the following formula
+\begin{equation}
+Z = \sum_ie^{-\beta E_i},\quad \beta=\frac{1}{kT},
+\end{equation}
+colloquially, the sum of a special transform of every state. For this system the partition function is
+\begin{equation}
+Z = e^{-\beta\varepsilon}+3e^{-2\beta\varepsilon}
+\end{equation}
+Now to employ Hermholtz' free energy
+\begin{equation}
+F = -kT\ln Z.
+\end{equation}
+First, computing
+\begin{align*}
+\ln Z &= \ln (e^{-\beta\varepsilon}+3e^{-2\beta\varepsilon} ) = \ln( e^{-\beta\varepsilon}) + \ln(1+3e^{-\beta\varepsilon} ) \\
+&\approx ln( e^{-\beta\varepsilon}) + \ln(3e^{-\beta\varepsilon} )  = -\beta\varepsilon + \ln(3) -\beta\varepsilon  = -2\beta\varepsilon + \ln(3)
+\end{align*}
+This is all probably wrong....
+
+\end{document}
