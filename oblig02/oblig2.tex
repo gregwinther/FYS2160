@@ -5,6 +5,7 @@
 \usepackage{listings}
 \usepackage{graphicx}
 \usepackage[]{hyperref}
+\usepackage{float}
 
 \lstset{
 	frame = single,
@@ -71,7 +72,26 @@ C_V = \left(\frac{\partial E}{\partial T} \right)_V
 In this case, the heat capacity is 
 \begin{equation*}
 C_V =\left(\frac{\partial E}{\partial T} \right)_V =
-\frac{3\varepsilon e^{\varepsilon/kT}}{T^2k(e^{\varepsilon/Tk}+3)^2}
+\frac{3\varepsilon e^{\varepsilon/Tk}}{T^2k(e^{\varepsilon/Tk}+3)^2}
 \end{equation*}
+
+\begin{table}[H]
+	\caption{Heat capacity for the simple diatomic molecule system.}
+	\begin{tabular}{rr} \hline
+	T[K]  & C[J/K] \\ \hline 
+	$  1$ & $8.8114\times10^5$ \\
+	$ 25$ & $2.1152\times10^7$ \\
+	$ 50$ & $5.1519\times10^8$ \\
+	$100$ & $1.2707\times10^8$ \\
+	$273$ & $1.6902\times10^9$ \\ \hline
+	\end{tabular}
+	\label{tab:heatcap1}
+\end{table}
+
+\begin{figure}[H]
+	\includegraphics[width=0.9\textwidth]{figures/heatcapsimple.png}
+	\caption{Plot of heat capacity vs temperature for the simple 			diatomic molecule system.}
+	\label{fig:heatcap1}
+\end{figure}
 
 \end{document}

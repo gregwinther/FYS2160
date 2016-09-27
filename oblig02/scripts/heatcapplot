@@ -1,1 +1,0 @@
-3*eps**2*exp(eps/(T*k))/(T**2*k*(exp(eps/(T*k)) + 3)**2)
