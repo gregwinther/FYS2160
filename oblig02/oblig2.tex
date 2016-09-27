@@ -42,19 +42,36 @@ The partition function is found by the following formula
 \begin{equation}
 Z = \sum_ie^{-\beta E_i},\quad \beta=\frac{1}{kT},
 \end{equation}
-colloquially, the sum of a special transform of every state. For this system the partition function is
+colloquially, the sum of a special transform called the Boltzmann factor of every state. For this system the partition function is
 \begin{equation}
 Z = e^{-\beta\varepsilon}+3e^{-2\beta\varepsilon}
 \end{equation}
-Now to employ Hermholtz' free energy
+One could employ Hermholtz' free energy
 \begin{equation}
-F = -kT\ln Z.
+F = E - TS= -kT\ln Z.
 \end{equation}
 First, computing
 \begin{align*}
 \ln Z &= \ln (e^{-\beta\varepsilon}+3e^{-2\beta\varepsilon} ) = \ln( e^{-\beta\varepsilon}) + \ln(1+3e^{-\beta\varepsilon} ) \\
-&\approx ln( e^{-\beta\varepsilon}) + \ln(3e^{-\beta\varepsilon} )  = -\beta\varepsilon + \ln(3) -\beta\varepsilon  = -2\beta\varepsilon + \ln(3)
+&\approx ln( e^{-\beta\varepsilon}) + \ln(3e^{-\beta\varepsilon} )  = -\beta\varepsilon + \ln(3) -\beta\varepsilon  = -2\beta\varepsilon + \ln(3).
 \end{align*}
-This is all probably wrong....
+The approximation on the second line might not strictily speaking be necessary because the expression for the partition function is simple enough as it is. Instead of going this way I will compute the average energy instead.
+
+The average energy of this system can be found by differentiating $Z$ with respect to $\beta$, and multiplying by $-1/Z$.
+\begin{equation}
+\bar{E} = -\frac{1}{Z}\frac{\partial Z}{\partial \beta}=
+\frac{\varepsilon e^{-\varepsilon\beta}+6\varepsilon e^{-2\varepsilon\beta} }{e^{-\varepsilon\beta} + 3e^{-\varepsilon\beta}} = \frac{\varepsilon(e^{exp(\varepsilon\beta}+6)}{e^{\varepsilon\beta}+3}.
+\end{equation}
+Because $\beta = 1/kT$ we have the energy as a function of temperature.
+
+The heat capaciy, when no work is done on the system and volume is constant, is given by
+\begin{equation}
+C_V = \left(\frac{\partial E}{\partial T} \right)_V
+\end{equation}
+In this case, the heat capacity is 
+\begin{equation*}
+C_V =\left(\frac{\partial E}{\partial T} \right)_V =
+\frac{3\varepsilon e^{\varepsilon/kT}}{T^2k(e^{\varepsilon/Tk}+3)^2}
+\end{equation*}
 
 \end{document}
