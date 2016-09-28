@@ -22,7 +22,7 @@ class RandomSpin():
 				self.microstates[i,j] = np.random.randint(2)*2 -1
 
 	def energyHistogram(self, binsNumber=10):
-		net_spin = np.zeros(self.M)
+		net_spin = np.zeros((self.M,1))
 		for i in range(self.M):
 			net_spin[i] = float(sum(self.microstates[i,:])) / 2
 		
@@ -30,15 +30,20 @@ class RandomSpin():
 		U = - 2 *self.mu * self.B * net_spin
 
 		# Analytical solution
-		nu = np.linspace(-self.N,self.N,self.M)
+		#STUFF NEEDS TO BE SORTED CORRECTLY!
+		#nu = np.linspace(-self.N,self.N,self.M)
+		nu = (- U / (2*self.mu*self.B))
+		
 		prob = self.M*\
 			scipy.misc.comb(self.N,self.N/2)*\
 			np.exp(-nu*nu/self.N)/\
 			2**(self.N)
-			
+			#np.exp(-U/(2*self.mu*self.B))/\
+	
+		print(U.shape,prob.shape)
 
-		plt.hist(U, bins=binsNumber, label="Numerical")
-		plt.plot(nu, prob, label="Analytical", linewidth=2)
+		#plt.hist(U, bins=binsNumber, label="Numerical")
+		plt.plot(U, prob, label="Analytical", linewidth=2)
 		plt.title("Histogram of M = "+ str(self.M) \
 			+ " and  N = " + str(self.N))
 		plt.xlabel("Frequency")
