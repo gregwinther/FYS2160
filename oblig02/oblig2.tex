@@ -75,6 +75,8 @@ C_V =\left(\frac{\partial E}{\partial T} \right)_V =
 \frac{3\varepsilon e^{\varepsilon/Tk}}{T^2k(e^{\varepsilon/Tk}+3)^2}
 \end{equation*}
 
+A plot of the heat capacity can be found in figure \ref{fig:heatcap1}. We see that the heat capacity quickly approaches zero for larger temperatures. This result is further underlined by the results shown in table \ref{tab:heatcap1}.
+
 \begin{table}[H]
 	\caption{Heat capacity for the simple diatomic molecule system.}
 	\begin{tabular}{rr} \hline
@@ -88,10 +90,19 @@ C_V =\left(\frac{\partial E}{\partial T} \right)_V =
 	\label{tab:heatcap1}
 \end{table}
 
+This system is not a very realistic system. There are very few moleucules involved, and the volume of the sytem is assumed to be unchanged as the temperature rises. One would assume that a system of gasseous nature would expand as the temperature increases. Furthermore, the temperature domain of the system is just arounda few degrees Kelvin at which most, if not all, substances are liquid. There are very few systems able to sustain temperatures this low\footnote{One example may be liquid helimum, which has a temperature of around 4 Kelvin}.
+
 \begin{figure}[H]
 	\includegraphics[width=0.9\textwidth]{figures/heatcapsimple.png}
 	\caption{Plot of heat capacity vs temperature for the simple 			diatomic molecule system.}
 	\label{fig:heatcap1}
 \end{figure}
+
+\section{Full model system of a rotating dimolecule}
+
+For a diatomic molecule, the rotational energies are quantized inte energy levels described by $j$
+\begin{equation}
+\varepsilon_j=j(j+1)\theta_r k, \quad j=0,1,2,\dots
+\end{equation}
 
 \end{document}
