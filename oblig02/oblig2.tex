@@ -77,7 +77,7 @@ C_V =\left(\frac{\partial E}{\partial T} \right)_V =
 
 A plot of the heat capacity can be found in figure \ref{fig:heatcap1}. We see that the heat capacity quickly approaches zero for larger temperatures. This result is further underlined by the results shown in table \ref{tab:heatcap1}.
 
-\begin{table}[H]
+\begin{table}[ht]
 	\caption{Heat capacity for the simple diatomic molecule system.}
 	\begin{tabular}{rr} \hline
 	T[K]  & C[J/K] \\ \hline 
@@ -92,7 +92,7 @@ A plot of the heat capacity can be found in figure \ref{fig:heatcap1}. We see th
 
 This system is not a very realistic system. There are very few moleucules involved, and the volume of the sytem is assumed to be unchanged as the temperature rises. One would assume that a system of gasseous nature would expand as the temperature increases. Furthermore, the temperature domain of the system is just arounda few degrees Kelvin at which most, if not all, substances are liquid. There are very few systems able to sustain temperatures this low\footnote{One example may be liquid helimum, which has a temperature of around 4 Kelvin}.
 
-\begin{figure}[H]
+\begin{figure}[ht]
 	\includegraphics[width=0.9\textwidth]{figures/heatcapsimple.png}
 	\caption{Plot of heat capacity vs temperature for the simple 			diatomic molecule system.}
 	\label{fig:heatcap1}
@@ -104,5 +104,29 @@ For a diatomic molecule, the rotational energies are quantized inte energy level
 \begin{equation}
 \varepsilon_j=j(j+1)\theta_r k, \quad j=0,1,2,\dots
 \end{equation}
+where
+\begin{equation}
+\theta_r k= \frac{\hbar^2}{2I}
+\end{equation}
+where $I$ is the moment of intertia for the molecule. The values of $\theta_r$ for some molecules are listed in table \ref{tab:thetar}. The energy states are degenerate, and the degeneration of each energy given by $j$ is $d(j)=2j+1$.
+
+\begin{table}[ht]
+	\centering
+	\caption{$\theta_r$ for differnet molecules}
+	\begin{tabular}{ccccccc} \hline
+ 	 & $H_2$ & $HCl$ & $HI$ & $N_2$ & $Cl_2$ & $I_2$ \\ \hline
+	$\theta_r(K)$ & 85.4 & 15.2 & 9.0 & 2.86 & 0.346 & 0.054 \\ \hline
+	\end{tabular}
+	\label{tab:thetar}
+\end{table} 
+
+The partition function for this system is
+\begin{equation}
+Z_{rot} = \sum_j (2j + 1)e^{-\beta\varepsilon_j} 
+        = \sum_j (2j + 1)e^{-\beta j(j+1)\theta_r k}
+        = \sum_j (2j + 1)e^{-j(j+1)\theta_r/T}
+\end{equation}
+
+
 
 \end{document}
