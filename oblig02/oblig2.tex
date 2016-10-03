@@ -11,12 +11,7 @@
 	frame = single,
 	language = Python,
 	showstringspaces = false,
-	tabsize = 2,
-	otherkeywords = {self},
-	keywordstyle = \color{blue},
-	identifierstyle=\color{deepgreen},
- 	stringstyle=\color{orange},
- 	backgroundcolor=\color{mygray}
+	tabsize = 2
 }
 
 \title[Rotation of Diatomic Molecules]{Rotation of Diatomic Molecules \\
@@ -32,7 +27,7 @@
 \maketitle
 
 \section{Introduction}
-This study shows how to connect a microscopic and macroscopic representation of a canonical system, as system with given $N$, $V$ and $T$ (number of particles/molecules, volume of the system and temperature respectively). A general method can be applied to all canonical systems. First, finding the partition function. Second, one derives a function for Hermholtz free energy. Lastly, the remaining interesting aspects of the system can be found, like the entropy and heat capacity. All program code for this project can be found at the github address stated above.
+This study is an exercise in how to compute all interesting properties of a simple system consisting of diatomic molecules A general method can be applied to all such systems. First, finding the partition function. Second, one computes the average energy of the system. Lastly, the remaining interesting aspects of the system can be found, like the entropy and heat capacity. Herein, a simple model system is studied first, and then similar methods are applied to a more general system. Both analytical and numerical methods are used on the latter. All program code for this project can be found at the github address stated above.
 
 \section{A simplified model system}
 In this simple system we look at a diatomic molecule, which at low temperatures can be in four different states, $i=1,2,3,4$, with energies $\varepsilon_i=\varepsilon$, $\varepsilon_2=\varepsilon_3=\varepsilon_4=2\varepsilon$. In other words, this system has two possible energies, $\varepsilon$ and $2\varepsilon$. The highest energy has a degeneracy of $3$.
@@ -88,7 +83,7 @@ A plot of the heat capacity can be found in figure \ref{fig:heatcap1}. We see th
 	\label{tab:heatcap1}
 \end{table}
 
-This system is not a very realistic system. There are very few moleucules involved, and the volume of the sytem is assumed to be unchanged as the temperature rises. One would assume that a system of gasseous nature would expand as the temperature increases. Furthermore, the temperature domain of the system is just arounda few degrees Kelvin at which most, if not all, substances are liquid. There are very few systems able to sustain temperatures this low\footnote{One example may be liquid helimum, which has a temperature of around 4 Kelvin}.
+This system is not a very realistic system. There are very few moleucules involved, and the volume of the sytem is assumed to be unchanged as the temperature rises. One would assume that a system of gasseous nature would expand as the temperature increases. Furthermore, the temperature domain of the system is just around a few degrees Kelvin at which most, if not all, substances are liquid or solid. There are very few systems able to sustain temperatures this low\footnote{One example may be liquid helimum, which has a temperature of around 4 Kelvin}. This is a good example of the third law of thermodynamics.
 
 \begin{figure}
 	\includegraphics[width=0.9\textwidth]{figures/heatcapsimple.png}
@@ -117,6 +112,8 @@ where $I$ is the moment of intertia for the molecule. The values of $\theta_r$ f
 	\end{tabular}
 	\label{tab:thetar}
 \end{table} 
+
+\subsection{Analytical approach}
 
 The partition function for this system is
 \begin{equation}
@@ -157,5 +154,82 @@ while for the case $T >> \theta_r$, all terms except the first one will disappea
 Z_{rot} = 1
 \end{equation*}
 
+The average energy of the system can be calculated in the same way as for the simplified system in the previous section, with the following equation
+\begin{equation}
+\bar{E}=-\frac{1}{Z}\frac{\partial Z}{\partial\beta}, \quad \beta=\frac{1}{kT}
+\end{equation}
+In our situation we must have that $T = 1/k\beta$. Then we get the following for the high temperature system, where $Z = T/\theta_r$
+\begin{equation*}
+\label{eq:anale}
+\bar{E}=-\frac{1}{Z}\frac{\partial Z}{\partial \beta } = 
+-\frac{\theta_r}{T}\frac{\partial}{\partial\beta}\frac{T}{\theta_r} = 
+-\frac{1}{T}\frac{\partial}{\partial\beta}\frac{1}{k\beta}=\frac{1}{T}\frac{k}{\beta^2}=\frac{k^2T^2}{kT}=kT
+\end{equation*}
+While for the low temperature system, the average energy must be zero, because the partition function is a constant.
+
+The heat capacity, assuming that the volume of the system is constant, is given by
+\begin{equation}
+C_V(T) = \left(\frac{\partial E}{\partial T}\right)_V
+\end{equation}
+which for the high temperature system gives us a heat capacity of Boltzmann's constant $k$. At a low temperature, the heat capacity is zero, in accordance with the simple system in the previous section. Furthermore, this is in accordance with \emph{the third law of thermodynamics}. At zero temperature, a system should settle into its unique lowest-energy state. where
+\begin{equation}
+\label{eq:thirdlaw}
+C_v \to 0 \text{ as } T \to 0
+\end{equation}
+
+\subsection{Numerical approach}
+In order to get a fuller understanding of the diatomic system, similar calculations like the ones above will be done, but now numerically.
+
+The following python function evaluates the partition function for various $T/\theta_r$.
+\lstinputlisting[firstline=11, lastline=35]{scripts/partition.py}
+The function will continue to compute new terms of the sum \lstinline|Z_| until these terms are lower than a tolerance $\epsilon=1.0\times10^{-12}$. A plot of the value of the partition function for values of $T/\theta_r$ from $1.0\times10^{-3}$ to $1.0\times10^{3}$ is shown in figure \ref{fig:numpartition}. It is evident, that for temperatures $T << \theta_r$ not much is happening in the system as the partition function asymptotically approaches a low value.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\textwidth]{figures/numpartition.png}
+	\caption{Numerical computiation of the partition function plotted against various values of $T/\theta_r$. The figure has a logarithmic scale on the x-axis.}
+	\label{fig:numpartition}
+\end{figure}
+
+It would be interesting to see how the numerical computation compares with the analytacl approximation. Such a comparison i shown in figure \ref{fig:numvsanal}. We can see that there is some difference between the two functions, especially at low levels. This makes sense because one of the assumptions that was made in order to find an analytical approximation was that $T >> \theta_r$. we see that the two solutions converge as the temperature $T$ increases relative to $\theta_r$. The values plotted in figure \ref{fig:numvsanal} are absolute values, the relative error will be insignificat at high temperatures. For high $T$, the analytical approximation misses by $1/3$.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\textwidth]{figures/numvsanal.png}
+	\caption{Absolute difference between the numerical computation and the analytical computation of the partition function. The analytical solution improves for higher temperatures, according to assumption.}
+	\label{fig:numvsanal}
+\end{figure}
+
+The energy and the heat capacity can also be computed numerically. In this system we have an average energy of
+\begin{equation}
+\label{eq:numenergy}
+\bar{E} = -\frac{1}{Z}\frac{\partial Z}{\partial \beta} \approx -\frac{1}{Z}\frac{\Delta Z}{\Delta \beta}
+\end{equation} 
+elaborating on this
+\begin{equation}
+\label{eq:deltabeta}
+\Delta \beta = \Delta \frac{1}{kT}= \frac{1}{k}\left(\frac{1}{T_{i+h}}-\frac{1}{T_i} \right)
+\end{equation}
+where $h$ is a tiny step. Putting equation \ref{eq:deltabeta} into equation \ref{eq:deltabeta} we get something like
+\begin{equation}
+\frac{\bar{E}_i}{k}=-\frac{k}{Z_i}\frac{Z_{i+h}-Z_i}{\frac{1}{T_{i+h}}-\frac{1}{T_i}}
+\end{equation}
+
+A functiong that attempts this computation would look something like this
+\lstinputlisting[firstline=37, lastline=55]{scripts/partition.py}
+
+A plot of the results from the program listing above is shown in figure \ref{fig:numenergy}. The plot forms a straight line, which is in accordance with the analytical result in equation \ref{eq:anale}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\textwidth]{figures/numenergy.png}
+	\caption{Numerically computed average energy of the system.}
+	\label{fig:numenergy}
+\end{figure}
+
+Employing the same finite difference scheme to compute the heat capacity would only result in a straight line, but would be done in a similar manner by computing
+\begin{equation}
+C_{V,i}=\frac{E_{i+h}-E_i}{T_{i+1}-T_i}
+\end{equation}
 
 \end{document}
