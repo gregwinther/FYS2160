@@ -129,7 +129,7 @@ G &= -NkT \ln (V-Nb) - \frac{NkT}{V-Nb} - \frac{2aN^2}{V} + c'(T)
 Once can rewrite the constant such that $c'(T) = NkTc(T)$ and insert for $pV$ (equation \ref{eq:pV}) in order to get
 \begin{equation}
 \label{eq:GvdW2}
-G = -NkT\ln (V-Nb) - \frac{aN^2}{V} + pV + NkTc(T)
+G_{vdW} = -NkT\ln (V-Nb) - \frac{aN^2}{V} + pV + NkTc(T)
 \end{equation}
 One will arrive at this expression by rewriting equation \ref{eq:GvdW1} directly as well.
 
@@ -139,7 +139,7 @@ It can be beneficial to rewrite Gibbs free energy to a dimensionless expression.
 & -NkT\ln (V-Nb) \frac{1}{G_cN} = -\frac{8NkT}{3kT_cN}\ln (V-Nb) = -\frac{8}{3} \hat{T}\ln(V-Nb) \\
 & -\frac{8}{3}\hat{T} \ln (\hat{V}V_c - \frac{1}{3}V_c) = -\frac{8}{3}\hat{T} \ln (3\hat{V}-1) - \frac{8}{3}\hat{T}\ln(\frac{V_c}{3})
 \end{align*}
-Singe I'm only interested in terms that depend on $\hat{p}$ and $\hat{\rho}$ I will ignore the second term. So the first term in equation \ref{eq:GvdW2} becomes
+Since I'm only interested in terms that depend on $\hat{p}$ and $\hat{\rho}$ I will ignore the second term. So the first term in equation \ref{eq:GvdW2} becomes
 \begin{equation}
 \label{eq:term1}
 -\frac{8}{3}\hat{T}\ln \left(\frac{3}{\hat{\rho}}-1 \right)
@@ -168,6 +168,34 @@ combining equations \ref{eq:term1} and \ref{eq:term2} yields the dimensionless f
 \hat{g} = \frac{G/G_c}{N} = -3\hat{\rho} -\frac{8}{3}\hat{T}\ln \left( \frac{3}{\hat{\rho}} - 1 \right) + \frac{\hat{p}}{\hat{\rho}}
 \end{equation}
 
-\section*{k)}
+\section*{k, l)}	
+\begin{figure}
+	\centering
+	\includegraphics[width=0.644\linewidth]{figures/kdensity.png}	
+	\includegraphics[width=0.644\linewidth]{figures/kvolume.png}
+  	\includegraphics[width=0.644\linewidth]{figures/kgibbs.png}
+  	\caption{All figures are for $\hat{T}=0.9$ in order to make comparison easy. From top: pressure as a function of density, volume as a function of pressure and Gibbs free energy for each molecule.}
+  	\label{fig:gibbsfigure}
+\end{figure}
+
+In figure \ref{fig:gibbsfigure} are three plots. The first one shows pressure of the system as function of density, the second shows volume as a function of pressure and the last one shows Gibbs free energy for each molecule. We see from the two first plots the same instability as in the previous problems. 
+
+The third plot is rather interesting. We see that the plot skips abruptly from one point to another. This is indeed an instability, and a reasonable explanation why it is there is that the fluid goes through phase transition.
+
+The curve rises in a regular fashion until it reaches at point and then skips downwards and to the left before rising again. This abrupt decrease in pressure before the energy rises again must be where the phase transition happens. The fluid goes from being a gas to a liquid.
+
+Gibbs free energy represents how a system has ``potential'' left to do a net ``something''. If we know where the phase transistion happens, we should also know where the minimum Gibbs free energy of the system is. One does now expect a spontaneous phase transition, ceteris paribus\footnote{Everything else remaining the same.}. At the intersecting point there is always another state (gas or liquid) at the same pressure with a lower Gibbs free energy. 
+
+\section*{m, n, o)}   
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\textwidth]{figures/maxwellConstruct.png}
+	\caption{Maxwell Constructions for different temperatures $\hat{T}$.}
+	\label{fig:MaxwellConstruct}
+\end{figure}
+
+Figure \ref{fig:MaxwellConstruct} shows three plots. The first two are Maxwell Constructions of the pressure-density space and the pressure-volume space, respectively. Theses are made using the third plot which is Gibbs free energy for different Gibbs free energies. 
+
+A necessary condition for stability is that the pressure does not increase with volume. If a liquid is contained in an expanding volume at constant temperature, at a certain point the liquid will begin to boil. The boiling liquid can be seen as being in two phases as once. If this two-phase coexistence holds as the volume continues to increase, the pressure remains constant. By replacing the ``wavy bit'' of the curves by a straight line such that the area between the wavy curve and the straight line is equal, one would remedy the situation. This is shown in figure \ref{fig:MaxwellConstruct}.
 
 \end{document}
