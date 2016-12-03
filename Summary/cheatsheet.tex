@@ -1,0 +1,33 @@
+\documentclass[11pt,twocolumn]{amsart}
+
+\usepackage[margin=0.5in]{geometry}
+
+\setcounter{section}{-1} 
+
+\begin{document}
+\section{Physical constants}
+$k=1.381\times10^{-23}J/K = 8.617\times10^{-5}eV/K$, $N_A = 6.022\times10^{23}$, $R=8.315 J/mol\cdot K$, $h=6.626\times10^{-34}J\cdot s = 4.136\times10^{-15}eV\cdot S$
+
+\section{Energy in Thermal Physics}
+
+\subsection{Thermal equilibrium}
+\emph{Temperature} is a measure of the tendency of an object to spontaneously give up energy to its surroundings. When two objects are in thermal contact, the one that tends to spontaneously \emph{lose} energy is at the \emph{higher} energy. Room temperature $~300K$
+
+\subsection{The ideal gas} $PV = nRT = Nk_BT$. $n$ is no of moles, $N=nN_A$ is number of molecules. $k_B = R/N_A$. Latter equation is valid when avg. space b/w molecules is larger than size of molecules. $\bar{E}_{K,trans} = \frac{3}{2}kT$.
+
+\subsection{Equipartition of energy}
+Theorem: at temperature $T$, the average energy of any quadratic degree of freedom is $\frac{1}{2}kT$. $U_{thermal} = Nf\frac{1}{2}kT$. Monoatomic gas: $f=3$. Diatomic gas: $f=5,6$ (3 trans., 2-3, rot.) or $f=8$ (3 trans., 3 rot., 2 vibr. K, P). Solid: $f=6$ (6 vibr. 3K, 3P). Some vibrational energies may be "frozen out" at room temperature.
+
+\subsection{Heat and work}  
+First law of thermodynamics \\$\Delta U = Q + W$. The change in energy is equal to the heat added and the work done. Heat transfer happens by \emph{conduction}, \emph{convection} and \emph{radiation}.
+
+\subsection{Compression work}
+Consider a piston. The force is $F=PA$. Assumes that the pressure is uniform. Compression must be slow enough so the gas has time to continually equilibrate to the changing conditions $\rightarrow$ \emph{quasistatic}. A compressed gas, i.e. negative $\Delta V$ gives $W=F\Delta x=PA\Delta x = -P\Delta V$. 
+\subsubsection{Compression of ideal gas}
+Two idealised ways: \\ \emph{Isothermal} compression is so slow that the temperature of the gas does not rise (quasistatic). \emph{Adiabatic} compression is so fast that no heat escapes during the compression. $VT^{f/2}=\text{constant}$, $V^{\gamma}P=\text{constant}$. $\gamma=\frac{f+2}{f}$ is the adiabatic exponent.
+
+\subsection{Heat capacities}
+Amount of heat needed to raise an object's temperature, per degree temperature increase: $C = \frac{Q}{\Delta T} = \frac{\Delta U - W}{\Delta T} $. $W=0$ and $V =\text{constant}$ is called heat capacity heat capacity at \emph{constant volume}, else there would be compression work, $-P\Delta V$. $C_V=\left(\frac{\partial U}{\partial T}\right)_V$. If an object expand when heated and do work on surroundings, there is negative $W$. At constant $P$, $Q$ i unambiguous $\rightarrow$ heat capacity at \emph{constant pressure}: $C_P = \left(\frac{\Delta U -(-P\Delta V)}{\Delta T}\right)_P=\left(\frac{\partial U}{\partial T}\right)_P + P\frac{\partial V}{\partial T}_P$.
+\subsection*{Latent heat} During a face transformation $C = \frac{Q}{\Delta T} = \frac{Q}{0} = \infty$. While $L=\frac{Q}{m}$ is the heat required to accomplish the transformation, the \emph{latent heat}.
+
+\end{document} 
