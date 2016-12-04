@@ -1,5 +1,7 @@
 \documentclass[11pt,twocolumn]{amsart}
 
+\usepackage{amsmath}
+\usepackage{physics}
 \usepackage[margin=0.5in]{geometry}
 
 \setcounter{section}{-1} 
@@ -28,6 +30,28 @@ Two idealised ways: \\ \emph{Isothermal} compression is so slow that the tempera
 
 \subsection{Heat capacities}
 Amount of heat needed to raise an object's temperature, per degree temperature increase: $C = \frac{Q}{\Delta T} = \frac{\Delta U - W}{\Delta T} $. $W=0$ and $V =\text{constant}$ is called heat capacity heat capacity at \emph{constant volume}, else there would be compression work, $-P\Delta V$. $C_V=\left(\frac{\partial U}{\partial T}\right)_V$. If an object expand when heated and do work on surroundings, there is negative $W$. At constant $P$, $Q$ i unambiguous $\rightarrow$ heat capacity at \emph{constant pressure}: $C_P = \left(\frac{\Delta U -(-P\Delta V)}{\Delta T}\right)_P=\left(\frac{\partial U}{\partial T}\right)_P + P\frac{\partial V}{\partial T}_P$.
-\subsection*{Latent heat} During a face transformation $C = \frac{Q}{\Delta T} = \frac{Q}{0} = \infty$. While $L=\frac{Q}{m}$ is the heat required to accomplish the transformation, the \emph{latent heat}.
+\subsubsection{Latent heat} During a face transformation $C = \frac{Q}{\Delta T} = \frac{Q}{0} = \infty$. While $L=\frac{Q}{m}$ is the heat required to accomplish the transformation, the \emph{latent heat}.
+\subsubsection{Enthalpy} To create a rabbit out of nothing, the sorcerer must summon up not only the energy $U$ of the rabbit, but also some additional energy, equal to $PV$, to push the atmosphere out of the way to make room. The \emph{enthalpy}: $H= U + PV$. At constant $P$, $\Delta H = Q + W_{other}$.
+
+\section{The Second Law}
+Entropy, and multiplicity, tends to increase.
+\subsection{Two-state systems} 
+Multiplicity is given by the binomial coefficient. $\Omega(N,n) = \frac{N!}{n!\cdot (N-n)! } = \binom{N}{n}$. How many ways to pick $n$ objects out of $N$. Permutations: $_nP_k = n(n-1)(n-2)\dots (n-k) = \frac{n!}{(n-k)!} $. Unordered permutations: $_nC_k = _nP_k / k! = \binom{n}{k}$.
+\subsection{Einstein model of a solid} 
+One energy unit is $h\nu = \hbar\omega$. Multiplicity of Einstein solid with $N$ oscillators (N/3 atoms) and $q$ energy units: $\Omega(N,q) = \binom{q+N-1}{q}$.
+\subsection{Interacting systems}
+Two solids are \emph{weakly coupled} when flow of energy between them is much slower than flow of energy between atoms within each solid. Macrostate is the combined system, specified by temporarily constrained values $U_A$, $U_B$. Over time they will change, with the sum $U_{tot} = U_A + U_B$ remaining fixed. All parameters in such a system is $N_A$, $N_B$, $q_{tot}=q_A+q_B$, $\Omega_{tot}=\Omega_A \Omega_B$. Fundamental assumption of statistical mechanics: In an isolated system, all accessible microstates are equally probable.
+\subsection{Large systems}
+If $\abs{x} << 1$, a Taylor expansion gives $\ln(x+1)\approx x$. If $N >> 1$ one can apply \emph{Stirling's approximation}: $N! \approx N^Ne^{-1}\sqrt{2\pi N}$. If $N$ is a large number, and $N!$ is very large, the square root factor can be omitted. This is usually good enough: $\ln N! = N\ln N - N$. In a large Einstein solid $q>>N$ is the high temperature limit: $\Omega \approx \frac{(q+N)!}{q!N!}$, $\ln\Omega \approx (q+N)\ln(q+N) - q\ln q - N\ln N$, where $\ln(q+N) \approx \ln q + \frac{N}{q}$. S.T.: $\ln\Omega \approx N\ln \frac{q}{N} + N + \frac{N^2}{q}$.
+\subsection{The ideal gas}
+$\Omega(U,V,N) = f(N)V^NU^{3N/2}$, where $f(N)$ is a complicated function of $N$. $\Omega_N = \frac{1}{N!}\frac{V^N}{h^{3N}}\times\text{(area of momentum hypersphere)}$. $\text{``area''} = \frac{2\pi^{d/2}}{(\frac{d}{2}-1)}r^{d-1}$, where  in general $d=3N$ and $r = \sqrt{2mU}$.
+\subsection{Entropy}
+$S = k\ln\Omega$. Now you see why the logarithm of the multiplicity is nice to have. Entropy of an ideal gas: $S = Nk \left[\ln\left(\frac{V}{N}\left(\frac{4\pi mU}{3Nh^2}\right)^{3/2} \right) + \frac{5}{2} \right]$ (The Sackur-Tetrode equation). Depends on $V$, $E$, $N$. Increasing any of them increases $S$. 
+\subsubsection{Mixing} One gas into another chamber: $\Delta S_A = Nk\ln\frac{V_f}{V_i}=Nk\ln 2$. Two gases mixing, by removing a partition: $\Delta S_{tot} = \Delta S_A + \Delta S_B = 2Nk \ln 2$. Must be distinguishable gases. Gibbs Paradox.
+\subsubsection{Irreversible} Processes that create new entropy are said to be irreversible. A sudden expansion is irreversible. A reversible volume change must in fact be quasistatic S.T. $W = - P\Delta V $.
+
+\section{Interactions and Implications}
+\subsection{Temperature} Two Einstein solids: $\frac{\partial S_A}{\partial U_A} = \frac{\partial S_B}{\partial U_B}(=0)$ at equilibrium with $N_A$, $N_B$ fixed.
+
 
 \end{document} 
