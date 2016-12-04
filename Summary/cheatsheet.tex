@@ -51,7 +51,22 @@ $S = k\ln\Omega$. Now you see why the logarithm of the multiplicity is nice to h
 \subsubsection{Irreversible} Processes that create new entropy are said to be irreversible. A sudden expansion is irreversible. A reversible volume change must in fact be quasistatic S.T. $W = - P\Delta V $.
 
 \section{Interactions and Implications}
-\subsection{Temperature} Two Einstein solids: $\frac{\partial S_A}{\partial U_A} = \frac{\partial S_B}{\partial U_B}(=0)$ at equilibrium with $N_A$, $N_B$ fixed.
+\subsection{Temperature}
+Two Einstein solids: $\frac{\partial S_A}{\partial U_A} = \frac{\partial S_B}{\partial U_B}$ at equilibrium with $N_A$, $N_B$ fixed. Temperature is defined as $\frac{1}{T} = \left(\frac{\partial S}{\partial U} \right)_{N,V}$. If the slope is large the temperature must be small and vice versa.
+\subsection{Entropy and heat}
+Algorithm to predict the heat capacity of a system: 1. Express the multiplicity $\Omega$ as a function of $N$, $V$ and $N$. 2. Take the logarithm to find the entropy: $S=k\ln\Omega$. 3. Differentiate with respect to $U$ and take the reciprocal to find the temperature, $T$ as a function of $U$ and other var's. 4. Solve for $U$ as a function of $T$ (and others). 5. Differentiate $U(T)$ to obtain a prediction of heat capacity (others held fixed). $C_V = \left(\frac{\partial U}{\partial T} \right)_{N,V}$. At very low temperatures all degrees of freedom must ``freeze out'', meaning $C_V \rightarrow 0$ as $T \rightarrow 0$. This is the \emph{third law}.
+\subsection{Paramagnetism}
+A system consists of $N$ spin-$\frac{1}{2}$ particles, often referred to as dipoles, immersed in a constant magnetic field $\vb{B}$. Total energy is $U=\mu B(N_\downarrow + N_\uparrow) = \mu B (N-2N_\uparrow)$. Magnetisation is $M=\mu(N_\downarrow - N_\uparrow) = -\frac{U}{B}$. Multiplicity is $\Omega(N_\uparrow) = \binom{N}{N_\uparrow}=\frac{N!}{N_\uparrow!N_\downarrow!}$.
+\subsection{Mechanical equilibrium and pressure}
+Pressure is $P = \left(\frac{\partial S}{\partial V} \right)_{U,N}$. Another proof of ideal gas law: $\Omega = f(N)V^NU^{3N/2}$, $S = Nk\ln V + \frac{3}{2}Nk \ln U + k \ln f(N)$, $P=T \frac{\partial}{\partial V}(Nk\ln V) = \frac{NkT}{V}$ $\rightarrow$ $PV = NkT$.
+\subsubsection{Thermodynamic identity}
+Two steps: $\Delta U$ and $\Delta V$. Sum of entropy change: $\Delta S = (\Delta S)_1 + (\Delta S)_2$. S.T. $dS = \left(\frac{\Delta S}{\Delta U}\right)_V \Delta U + \left(\frac{\Delta S}{\Delta V}\right)_U \Delta V$, then for a small change $dS = \left(\frac{\partial S}{\partial U}\right)_V d U + \left(\frac{\partial S}{\partial V}\right)_U d V$. Inserting definitions of temperature and pressure yields $dS = \frac{1}{T}dU + \frac{P}{T}dV$ which can be rearranged to $dU = TdS - PdV$.
+\subsubsection{Entropy and heat again.}
+$dU = Tds - PdV = Q + W$ if any volume change is quasistatic. If $Q = 0$ the process is also adiabatic $\rightarrow$ isentropic. We have $(\Delta S)_V = \int_{T_i}^{T_f}\frac{C_V}{T}dT$ and  $(\Delta S)_P = \int_{T_i}^{T_f}\frac{C_P}{T}dT$
+\subsection{Diffusive equilibrium and chemical potential}
+The chemical potential is $\mu = -T\left(\frac{\partial S}{\partial N}\right)_{U,V} = \left( \frac{\Delta U}{\Delta N}\right)_S = -\epsilon$, where $\epsilon$ is the size of a unit of energy. The generalised thermodynamic identity becomes $dU = TdS - PdV + \sum \mu_i dN_i$
 
+\section{Engines and Refrigerators}
+ 
 
 \end{document} 
