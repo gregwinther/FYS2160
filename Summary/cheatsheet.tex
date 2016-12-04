@@ -67,6 +67,8 @@ $dU = Tds - PdV = Q + W$ if any volume change is quasistatic. If $Q = 0$ the pro
 The chemical potential is $\mu = -T\left(\frac{\partial S}{\partial N}\right)_{U,V} = \left( \frac{\Delta U}{\Delta N}\right)_S = -\epsilon$, where $\epsilon$ is the size of a unit of energy. The generalised thermodynamic identity becomes $dU = TdS - PdV + \sum \mu_i dN_i$
 
 \section{Engines and Refrigerators}
- 
+\subsection{Heat engine} A device that absorbs heat and converts part of that energy into work. The work produced is the difference between the heat absorbed and the waste expelled: $W = Q_h-Q_c$, where $Q_h$ is heat absorbed from the hot reservoir and $Q_c$ is heat expelled to cold reservoir. Efficiency: $e \equiv \frac{W}{Q_h} = \frac{Q_h-Q_c}{Q_h} = 1 - \frac{Q_c}{Q_h}$. First law: energy is conserved. Second law: entropy is a fluid that can be created but never destroyed, ergo $\frac{Q_c}{t_c} \geq \frac{Q_h}{T_h}$ and $\frac{Q_c}{Q_h} \geq \frac{T_c}{T_h}$. One concludes $e \leq 1 - \frac{T_c}{T_h}$.
+\subsubsection{The Carnot cycle (max efficiency)} Four steps: 1. Isothermal expansion at $T_h$ while absorbing heat. 2. adiabatic expansion to $T_c$. 3. Isothermal compression at $T_c$ while expelling heat. 4. Adiabatic compression back to $T_h$. The system must be but in contact with the hot reservoir during step 1 and with the cold reservoir during step 3.
+\subsection{Refrigerators} A heat engine in reverse. Efficiency now called coefficient of performance $\text{COP}=\frac{Q_c}{W}=\frac{Q_c}{Q_h-Q_c} = \frac{1}{Q_h/Q_c -1}$. Some inequalities: $\frac{Q_h}{T_h} \geq \frac{Q_c}{T_c}$ which gives $\frac{Q_h}{Q_c} \geq \frac{T_h}{T_c}$. One can conclude $\text{COP} \leq \frac{1}{T_h/T_c -1} =\frac{T_c}{T_h - T_c}$.
 
 \end{document} 
