@@ -143,4 +143,10 @@ QHO allowed energies: $E_n = 0, hf, 2hf, \dots$. Partition function: $Z = 1 \ e^
 \subsection{Bose-Einstein Condensation}
 Energy of atoms in box: $\epsilon_0 = \frac{3h^2}{8mL^2}$. Atoms in this state (B-E):\\ $N_0 = \frac{1}{e^{(\epsilon_0-\mu)(kt} - 1}$. Taylor series gives $ \frac{kT}{\epsilon_0 - \mu}$. Total number of atoms approximated by integral $N = \int_0^{\infty} g(\epsilon) \frac{1}{e^{(\epsilon - \mu)/kT} - 1} d\epsilon$. Density of states: $g(\epsilon) = \frac{2}{\sqrt{\pi}}\left( \frac{2\pi m}{h^2} \right)^{3/2} V\sqrt{\epsilon}$. Guess $\mu = 0$, switch $x= \epsilon/kT$. $N = \frac{2}{\sqrt{\pi}}\left( \frac{2\pi m}{h^2} \right)^{3/2} V \int_0^\infty \frac{\sqrt{\epsilon}d\epsilon}{e^{\epsilon/kT}-1} = \frac{2}{\sqrt{\pi}}\left( \frac{2\pi m kT}{h^2} \right)^{3/2} V \int_0^\infty \frac{\sqrt{x}dx}{e^x - 1}$. The integral is $2.315$. Wrong result. $N_{excited} = 2.612 \left(\frac{2\pi m kT}{h^2} \right)^{3/2} V = \left(\frac{T}{T_c} \right)^{3/2}N$ when $T < T_c$. Rest is in ground state, $N_0 = N-N_{excited} = \left[1- \left(\frac{T}{T_c} \right)^{3/2} \right]N$. Abrupt accumulation of atoms in ground state at temperatures below $T_c$ is called \textbf{Bose-Einstein condensation}.
 
+\section*{Scripts}
+$E = \sum_{i=1}^N aS_i$
+\lstinputlisting[firstline=4, lastline=10, frame=single]{../programs/spinsystem.py}
+Random matrix of $-1$ and $1$.
+\lstinputlisting[firstline=3, lastline=12, frame=single]{../programs/randomstate.py}
+
 \end{document} 
