@@ -3,6 +3,8 @@
 \usepackage{amsmath}
 \usepackage{physics}
 \usepackage[margin=0.2in]{geometry}
+\usepackage{graphicx}
+\usepackage{listings}
 
 \setcounter{section}{-1} 
 
@@ -68,7 +70,11 @@ The chemical potential is\\ $\mu = -T\left(\frac{\partial S}{\partial N}\right)_
 
 \section{Engines and Refrigerators}
 \subsection{Heat engine} A device that absorbs heat and converts part of that energy into work. The work produced is the difference between the heat absorbed and the waste expelled: $W = Q_h-Q_c$, where $Q_h$ is heat absorbed from the hot reservoir and $Q_c$ is heat expelled to cold reservoir. Efficiency: $e \equiv \frac{W}{Q_h} = \frac{Q_h-Q_c}{Q_h} = 1 - \frac{Q_c}{Q_h}$. First law: energy is conserved. Second law: entropy is a fluid that can be created but never destroyed, ergo $\frac{Q_c}{t_c} \geq \frac{Q_h}{T_h}$ and $\frac{Q_c}{Q_h} \geq \frac{T_c}{T_h}$. One concludes $e \leq 1 - \frac{T_c}{T_h}$.
-\subsubsection{The Carnot cycle (max efficiency)} Four steps:\\1. Isothermal expansion at $T_h$ while absorbing heat. 2. adiabatic expansion to $T_c$. 3. Isothermal compression at $T_c$ while expelling heat. 4. Adiabatic compression back to $T_h$. The system must be but in contact with the hot reservoir during step 1 and with the cold reservoir during step 3.
+\subsubsection{The Carnot cycle (max efficiency) of ideal gas} Four steps: 1. Isothermal expansion at $T_h$ while absorbing heat. Ideal gas equation gives pressure $P = \frac{NkT}{V}$. Energy is linear in temperature, $Q = W$. Heat transferred is $W = \int_{V_1}^{V_2} pdV = NkT \int_{V_1}^{V_2} \frac{1}{V} dV = NkT \ln \frac{V_2}{V_1} $2. Gas is thermally isolated. Adiabatic expansion to $T_c$. $Q = 0$, $du = W$. Monoatomic ideal gas: $W = \frac{3}{2}Nk(T_h -T_l)$. Entropy is constant, given by Sackur-Tetrode. End of expansion $\frac{V_3}{V_2}=\left(\frac{T_h}{T_l} \right)^{3/2}$. $P(V)$ curve is adiabat. 3. Isothermal compression at $T_c$ while expelling heat. Compressed to $V_4$. $\frac{V_4}{V_1} = \left(\frac{T_h}{T_l}\right)^{3/2}$. Work is $W_{3,4} = \int_3^4 pdV = NkT_L \ln \frac{V_3}{V_4} = NkT_L \ln \frac{V_2}{V_1}$. 4. Adiabatic compression back to $T_h$. Work is $W_{4,1}=\frac{3}{2}Nk(T_h - T_l)$. Total work is area under curve $W_{net} = Q_h - Q_l = Nk(T_h - T_l) \ln\frac{V_2}{V_1}$.
+\begin{figure}
+	\includegraphics[width=0.30\textwidth]{carnot.png}
+\end{figure}
+
 \subsection{Refrigerators} A heat engine in reverse. Efficiency now called coefficient of performance $\text{COP}=\frac{Q_c}{W}=\frac{Q_c}{Q_h-Q_c} = \frac{1}{Q_h/Q_c -1}$. Some inequalities: $\frac{Q_h}{T_h} \geq \frac{Q_c}{T_c}$ which gives $\frac{Q_h}{Q_c} \geq \frac{T_h}{T_c}$. One can conclude $\text{COP} \leq \frac{1}{T_h/T_c -1} =\frac{T_c}{T_h - T_c}$.
 
 \section{Free energy and Chemical thermodynamics}
@@ -109,7 +115,7 @@ From equipartition theorem, $v_{rms} = \sqrt{\frac{3kT}{m}}$. This is an average
 System at fixed $U$ in contact with reservoir at $T$. $Z(T)$ analogous to $\Omega(T)$. $F=U-TS=-kT\ln Z$, tends to decrease. $S=-\left(\frac{\partial F}{\partial T}\right)_{V,N}$, $P=-\left(\frac{\partial F}{\partial V}\right)_{T,N}$, $\mu=+\left(\frac{\partial F}{\partial N}\right)_{T,V}$.
 
 \subsection{Partition Functions for Composite Systems}
-\textbf{Two particles}: $ Z_{tot} = \sum_s e^{-\beta[E_1(s) + E_2(s)]} = \sum_s e^{-\beta E_1(s)} e^{-\beta E_2(s)}$. Distinguishable $ Z_{tot} = \sum_{s_1} \sum_{s_2} e^{-\beta E_1(s_1)} e^{-\beta E_2(s_2)} = Z_1 Z_2$. Indistinguishable  $Z_{tot} = \frac{1}{2} Z_1 Z_2$. \textbf{$N$ particles}: Distinguishable $ Z_{tot} = Z_1 Z_2 Z_3 \dots Z_N $. Indistinguishable $ Z_{tot} \frac{1}{Z}Z_1^N $. Assumes low density, i.e. 
+\textbf{Two particles}: $ Z_{tot} = \sum_s e^{-\beta[E_1(s) + E_2(s)]} = \sum_s e^{-\beta E_1(s)} e^{-\beta E_2(s)}$. Distinguishable $ Z_{tot} = \sum_{s_1} \sum_{s_2} e^{-\beta E_1(s_1)} e^{-\beta E_2(s_2)} = Z_1 Z_2$. Indistinguishable  $Z_{tot} = \frac{1}{2} Z_1 Z_2$. \textbf{$N$ particles}: Distinguishable $ Z_{tot} = Z_1 Z_2 Z_3 \dots Z_N $. Indistinguishable $ Z_{tot} = \frac{1}{Z!}Z_1^N $. Assumes low density, i.e. no interaction between particles.
 
 \subsection{Ideal gas revisited}
 Boltzmann factors $ e^{-E(s)/kT} = e^{-E_{tr}(s)/kT} e^{-E_{int}(s)/kT} $, additionally $ Z_1 = Z_{tr} Z_{int} $. Translational first: Standing wave patterns are limited to $ \lambda_n = \frac{2L}{n} $, using de Broglie ($p=h/\lambda$), $ p_n = \frac{h}{\lambda_n}=\frac{hn}{2L} $. Energy-momentum relation ($E=p^2/2m$), $ E_n = \frac{p_n^2}{2m}=\frac{h^2n^2}{8mL^2}$. $ Z_{\text{1D}} = \sum_n e^{-E_n/kT} = \sum_n e^{-h^2n^2/8mL^2 kT}$. Integral approx $ Z_{\text{1D}} = \int_0^{\infty} e^{-h^2n^2/8mL^2 kT} dn = \frac{\sqrt{\pi}}{2} \sqrt{\frac{8mL^2kT}{h^2}} = \sqrt{\frac{2\pi mkT}{h^2}}L \equiv \frac{L}{\ell_Q}$. In 3D: $ E_{tr} = \frac{p_x^2}{2m} + \frac{p_y^2}{2m} + \frac{p_z^2}{2m}$ and $ Z_{tr} = \frac{L_x}{\ell_Q}\frac{L_y}{\ell_Q}\frac{L_z}{\ell_Q} = \frac{V}{v_Q} $. Partition function for one particle: $ Z_1 = \frac{V}{v_Q}Z_{int}$ and for $N$: $ Z = \frac{1}{N!} \left(\frac{V Z_{int}}{v_Q} \right)^N $.
